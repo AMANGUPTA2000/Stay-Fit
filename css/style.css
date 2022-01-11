@@ -2610,6 +2610,7 @@ ol {
 	width: 100%;
 }
 
+
 /*---------------------
   404 Section
 -----------------------*/
@@ -2722,6 +2723,21 @@ ol {
 	color: #f36100;
 	margin-right: 5px;
 }
+.content
+{
+	height:40vh;
+	padding-top: 100px;
+	background-color: #252525;
+}
+.text-content p
+{
+	font-size:50px;
+	text-align:center;
+	line-height:1.0;
+	color:#f36100;
+	font-weight:bold;
+	font-family: Oswald, sans-serif;
+}
 
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
@@ -2729,6 +2745,7 @@ ol {
 	.nav-menu ul li {
 		margin-right: 60px;
 	}
+	
 }
 
 @media only screen and (min-width: 1200px) {
@@ -3192,6 +3209,7 @@ ol {
 		float: none;
 		margin-top: 0;
 	}
+	
 	.hs-slider .hs-item .hi-text h1 {
 		font-size: 38px;
 		line-height: normal;
