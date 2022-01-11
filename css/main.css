@@ -175,7 +175,7 @@ h6 {
   background: -webkit-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
   background: -moz-linear-gradient(bottom, #fbc2eb 0%, #500af5 100%);
   background: -o-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
-  background: linear-gradient(to top, #00037a 0%, #ff5018 100%);
+  background: linear-gradient(to right top, #010000 10%, #d53400 100%)
   /* #ff5018 0%, #00037a  */
 }
 
@@ -187,7 +187,11 @@ h6 {
 }
 
 .p-t-180 {
-  padding-top: 125px;
+  padding-top: 3%;
+}
+
+.p-t-181 {
+  padding-top: 0.5%;
 }
 
 .p-t-20 {
@@ -256,6 +260,10 @@ h6 {
 
 .btn--green {
   background: #57b846;
+}
+
+.btn--orange {
+  background: #ff7b00;
 }
 
 .btn--green:hover {
@@ -499,7 +507,7 @@ input {
 }
 
 .card-3 .card-heading {
-  background: url("../images/main.jpg");
+  background: url("../img/main.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   display: table-cell;
