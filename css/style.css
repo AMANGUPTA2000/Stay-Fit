@@ -2752,6 +2752,9 @@ ol {
 	.container {
 		max-width: 1170px;
 	}
+	.copyright-text2{
+		visibility: hidden;
+	}
 }
 
 /* Medium Device = 1200px */
@@ -2773,6 +2776,12 @@ ol {
 	.blog-item .bi-pic img {
 		height: auto;
 	}
+	.copyright-text{
+		visibility: hidden;
+	}
+	.copyright-text2{
+		visibility: visible;
+	}
 }
 
 /* Tablet Device = 768px */
@@ -2782,6 +2791,12 @@ ol {
 	{
 		height:auto;
 		min-height:20vh;
+	}
+	.copyright-text{
+		visibility: hidden;
+	}
+	.copyright-text2{
+		visibility: visible;
 	}
 	.about-text {
 		height: auto;
@@ -2980,6 +2995,13 @@ ol {
 /* Wide Mobile = 480px */
 
 @media only screen and (max-width: 767px) {
+	
+	.copyright-text{
+		visibility: hidden;
+	}
+	.copyright-text2{
+		visibility: visible;
+	}
 	.offcanvas-menu-overlay {
 		position: fixed;
 		left: 0;

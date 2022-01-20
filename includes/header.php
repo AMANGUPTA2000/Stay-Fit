@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    
 </head>
 
 <body>
@@ -31,10 +33,15 @@
         <div class="loader">
  
         </div>
-        <div clas="copyright-text" style="color: rgb(243,97,0);position: fixed;top: 70%;left: 45%;transform: translate(-50%, -50%);"><a href="https://amangupta2000.github.io/" target="_blank" rel="noopener noreferrer"></a>Aman Gupta</div>
-        <div clas="copyright-text" style="color: rgb(243,97,0);position: fixed;top: 70%;left: 55%;transform: translate(-50%, -50%);">Dhruv Gandhi</div>
-        <div clas="copyright-text" style="color: rgb(243,97,0);position: fixed;top: 80%;left: 45%;transform: translate(-50%, -50%);">Jathin Prakash</div>
-        <div clas="copyright-text" style="color: rgb(243,97,0);position: fixed;top: 80%;left: 55%;transform: translate(-50%, -50%);">Neehal Hansoti</div>
+        <div class="copyright-text" style="color: rgb(243,97,0);position: fixed;top: 70%;left: 45%;transform: translate(-50%, -50%);"><a href="https://amangupta2000.github.io/" target="_blank" rel="noopener noreferrer"></a>Aman Gupta</div>
+        <div class="copyright-text" style="color: rgb(243,97,0);position: fixed;top: 70%;left: 55%;transform: translate(-50%, -50%);">Dhruv Gandhi</div>
+        <div class="copyright-text" style="color: rgb(243,97,0);position: fixed;top: 80%;left: 45%;transform: translate(-50%, -50%);">Jathin Prakash</div>
+        <div class="copyright-text" style="color: rgb(243,97,0);position: fixed;top: 80%;left: 55%;transform: translate(-50%, -50%);">Neehal Hansoti</div>
+
+        <div class="copyright-text2" style="color: rgb(243,97,0);position: relative;top: 70%;left: 45%;"><a href="https://amangupta2000.github.io/" target="_blank" rel="noopener noreferrer"></a>Aman Gupta</div>
+        <div class="copyright-text2" style="color: rgb(243,97,0);position: relative;top: 70%;left: 45%;">Dhruv Gandhi</div>
+        <div class="copyright-text2" style="color: rgb(243,97,0);position: relative;top: 70%;left: 45%;">Jathin Prakash</div>
+        <div class="copyright-text2" style="color: rgb(243,97,0);position: relative;top: 70%;left: 45%;">Neehal Hansoti</div>
     </div>
 
     <!-- Offcanvas Menu Section Begin -->
