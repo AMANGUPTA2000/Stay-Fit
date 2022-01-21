@@ -5,7 +5,7 @@
                 <div class="col-md-4">
                     <div class="gt-text">
                         <i class="fa fa-map-marker"></i>
-                        <p><a href="https://goo.gl/maps/vQk8xA7kKdyfh7xY7" target="_blank" style="color:#fff">SVIT Road, Rajupura Village, Vasad, Anand, Gujarat 388306</p>
+                        <p><a href="https://goo.gl/maps/vQk8xA7kKdyfh7xY7" target="_blank" style="color:#fff">SVIT Vasad, Rajupura Village, Vasad, Anand, Gujarat 388306</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -20,7 +20,7 @@
                 <div class="col-md-4">
                     <div class="gt-text email">
                         <i class="fa fa-envelope"></i>
-                        <p><a href="mailto:info.stayfithealth@gmail.com" target="_blank" style="color:#fff">info.stayfithealth@gmail.com</p>
+                        <p><a href="mailto:info.stayfithealth@gmail.com" target="_blank" style="color:#fff">info.stayfithealth@gmail.com</a></p>
                     </div>
                 </div>
             </div>
