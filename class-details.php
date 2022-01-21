@@ -8,7 +8,7 @@
                     <div class="breadcrumb-text">
                         <h2>Classes detail</h2>
                         <div class="bt-option">
-                            <a href="./index.html">Home</a>
+                            <a href="./index.php">Home</a>
                             <a href="#">Classes</a>
                             <span>Body building</span>
                         </div>

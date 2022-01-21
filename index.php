@@ -48,8 +48,8 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-034-stationary-bike"></span>
-                        <h4>Modern equipment</h4>
-                        <p>When Stay-Fit arrives at your door or the setting of your choice, we provide equipment that's clean and state-of-the-art.</p>
+                        <h4>Digital Fitness</h4>
+                        <p>When Stay-Fit arrives at your door or the setting of your choice, we provide best in class digital fitness program with advance and personalised routines.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">

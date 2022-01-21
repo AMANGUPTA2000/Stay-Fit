@@ -8,7 +8,7 @@
                     <div class="breadcrumb-text">
                         <h2>About us</h2>
                         <div class="bt-option">
-                            <a href="./index.html">Home</a>
+                            <a href="./index.php">Home</a>
                             <span>About</span>
                         </div>
                     </div>
@@ -33,33 +33,29 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-034-stationary-bike"></span>
-                        <h4>Modern equipment</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            dolore facilisis.</p>
+                        <h4>Digital Fitness</h4>
+                        <p>When Stay-Fit arrives at your door or the setting of your choice, we provide best in class digital fitness program with advance and personalised routines.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-033-juice"></span>
                         <h4>Healthy nutrition plan</h4>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
-                            facilisis.</p>
+                        <p>Tired of performing the same routine over and over again? With Stay-Fit, no two workouts are the same. We create customized workout plans that are designed to help you stay motivated.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-002-dumbell"></span>
-                        <h4>Proffesponal training plan</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            dolore facilisis.</p>
+                        <h4>Professional training plan</h4>
+                        <p>We have the ability to come to work with you in the comfort of your preferred setting. Our one-on-one sessions are structured around your body and the goals you want to achieve in order to maximize results.</p>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6">
                     <div class="cs-item">
                         <span class="flaticon-014-heart-beat"></span>
                         <h4>Unique to your needs</h4>
-                        <p>Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel
-                            facilisis.</p>
+                        <p>Studies show that working out can help build up your body's defenses. This will make you feel more energetic and boost your ability to prevent diseases.</p>
                     </div>
                 </div>
             </div>
@@ -73,7 +69,7 @@
             <div class="row">
                 <div class="col-lg-6 p-0">
                     <div class="about-video set-bg" data-setbg="img/about-us.jpg">
-                        <a href="https://www.youtube.com/watch?v=EzKkl64rRbM" class="play-btn video-popup"><i
+                        <a href="https://www.youtube.com/watch?v=Z63w5PefxTQ" class="play-btn video-popup"><i
                                 class="fa fa-caret-right"></i></a>
                     </div>
                 </div>
@@ -81,13 +77,10 @@
                     <div class="about-text">
                         <div class="section-title">
                             <span>About Us</span>
-                            <h2>What we have done</h2>
+                            <h2>What we do</h2>
                         </div>
                         <div class="at-desc">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
-                                viverra maecenas accumsan lacus vel facilisis. aliquip ex ea commodo consequat sit amet,
-                                consectetur adipiscing elit, sed do eiusmod tempor.</p>
+                            <p>We want to help you live a fit and healthy lifestyle! We do this by helping you find the most suitable plan for your home gym, studio, or commercial gym, keeping your budget, lifestyle, and fitness goals in mind. We stock a wide range of training plans and sessions, with strength, cardio, cross-training and so much more. Our awesome team is always keen to help, Stay-Fit, Stay-Healthy.</p>
                         </div>
                         <div class="about-bar">
                             <div class="ab-item">
@@ -201,9 +194,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="bs-text">
-                        <h2>registration now to get more deals</h2>
+                        <h2>Register now to get more deals</h2>
                         <div class="bt-tips">Where health, beauty and fitness meet.</div>
-                        <a href="#" class="primary-btn  btn-normal">Appointment</a>
+                        <a href="get-started.html" class="primary-btn  btn-normal">Register Now</a>
                     </div>
                 </div>
             </div>
@@ -218,7 +211,7 @@
                 <div class="col-lg-12">
                     <div class="section-title">
                         <span>Testimonial</span>
-                        <h2>Our cilent say</h2>
+                        <h2>Our client say</h2>
                     </div>
                 </div>
             </div>

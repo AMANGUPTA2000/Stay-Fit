@@ -60,15 +60,15 @@
                 <li><a href="./classes.php">Classes</a></li>
                 <li><a href="./services.php">Services</a></li>
                 <!-- <li><a href="./team.php">Our Team</a></li> -->
-                <li><a href="#">Pages</a>
+                <li><a href="#">More</a>
                     <ul class="dropdown">
-                        <li><a href="./about-us.php">About us</a></li>
+                        <!-- <li><a href="./about-us.php">About us</a></li> -->
                         <li><a href="./class-timetable.php">Classes timetable</a></li>
                         <li><a href="./bmi-calculator.php">Bmi calculate</a></li>
                         <!-- <li><a href="./team.php">Our team</a></li> -->
                         <li><a href="./gallery.php">Gallery</a></li>
                         <li><a href="./blog.php">Our blog</a></li>
-                        <li><a href="./404.php">404</a></li>
+                        <!-- <li><a href="./404.php">404</a></li> -->
                     </ul>
                 </li>
                 <li><a href="./contact.php">Contact</a></li>
@@ -103,15 +103,15 @@
                             <li><a href="./class-details.php">Classes</a></li>
                             <li><a href="./services.php">Services</a></li>
                             <!-- <li><a href="./team.php">Our Team</a></li> -->
-                            <li><a href="#">Pages</a>
+                            <li><a href="#">More</a>
                                 <ul class="dropdown">
-                                    <li><a href="./about-us.php">About us</a></li>
+                                    <!-- <li><a href="./about-us.php">About us</a></li> -->
                                     <li><a href="./class-timetable.php">Classes timetable</a></li>
                                     <li><a href="./bmi-calculator.php">Bmi calculate</a></li>
                                     <!-- <li><a href="./team.php">Our team</a></li> -->
                                     <li><a href="./gallery.php">Gallery</a></li>
                                     <li><a href="./blog.php">Our blog</a></li>
-                                    <li><a href="./404.php">404</a></li>
+                                    <!-- <li><a href="./404.php">404</a></li> -->
                                 </ul>
                             </li>
                             <li><a href="./contact.php">Contact</a></li>
