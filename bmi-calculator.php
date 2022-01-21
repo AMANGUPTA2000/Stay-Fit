@@ -9,7 +9,6 @@
                         <h2>BMI calculator</h2>
                         <div class="bt-option">
                             <a href="./index.php">Home</a>
-                            <a href="#">Pages</a>
                             <span>BMI calculator</span>
                         </div>
                     </div>
@@ -63,25 +62,26 @@
                         <h2>CALCULATE YOUR BMI</h2>
                     </div>
                     <div class="chart-calculate-form">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo
-                            viverra maecenas accumsan lacus vel facilisis.</p>
+                        <p>Body mass index is a value derived from the mass and height of a person. The BMI is defined as the body mass divided by the square of the body height, and is expressed in units of kg/m², resulting from mass in kilograms and height in metres.</p>
                         <form action="#">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Height / cm">
+                                    <input type="text" placeholder="Height / cm" id="height" required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Weight / kg">
+                                    <input type="text" placeholder="Weight / kg" id="weight" required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Age">
+                                    <input type="text" placeholder="Age" required>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" placeholder="Sex">
+                                    <input type="text" placeholder="Sex" required>
+                                </div>
+                                <div class="col-sm-6" id="bmi">
+                                    <span style="color:#fff"> Your BMI is </span><input disabled value="" type="text" name="total" id="total">
                                 </div>
                                 <div class="col-lg-12">
-                                    <button type="submit">Calculate</button>
+                                    <button type="submit" onclick="bmi()" name="btn">Calculate</button>
                                 </div>
                             </div>
                         </form>
@@ -90,5 +90,15 @@
             </div>
         </div>
     </section>
+    <script type="text/javascript">
+      function bmi() {
+        var val1 = document.getElementById('height').value;
+        var val2 = document.getElementById('weight').value;
+        var sum = Number(val2) / (Number(val1)*Number(val1)/10000);
+        var tot = sum.toFixed(2);
+        document.getElementById('total').value = tot;
+      }
+
+    </script>
     <!-- BMI Calculator Section End -->
     <?php include 'includes/footer.php'; ?>
