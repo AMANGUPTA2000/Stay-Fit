@@ -31,30 +31,21 @@
                         <div class="cd-text">
                             <div class="cd-single-item">
                                 <h3>Body buiding</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                                    irure Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua accusantium doloremque
-                                    laudantium. Excepteur sint occaecat cupidatat non proident sculpa.</p>
+                                <p>Bodybuilding, a regimen of exercises designed to enhance the human body's muscular development and promote general health and fitness. As a competitive activity, bodybuilding aims to display in artistic fashion pronounced muscle mass, symmetry, and definition for overall aesthetic effect.</p>
                             </div>
                             <div class="cd-single-item">
                                 <h3>Trainer</h3>
-                                <p>Dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                    reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur officia
-                                    deserunt mollit.</p>
+                                <p>A fitness trainer leads, instructs, and motivates individuals or groups in exercise activities, including cardiovascular exercise (exercises for the heart and blood system), strength training, and stretching. Getting fit and staying fit takes a lot of work and motivation.</p>
                             </div>
                         </div>
                         <div class="cd-trainer">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="cd-trainer-pic">
+                                    <!-- <div class="cd-trainer-pic">
                                         <img src="img/classes/class-details/trainer-profile.jpg" alt="">
-                                    </div>
+                                    </div> -->
                                 </div>
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="cd-trainer-text">
                                         <div class="trainer-title">
                                             <h4>Athart Rachel</h4>
@@ -80,7 +71,7 @@
                                             tempor incididunt ut labore et dolore magna aliqua viverra maecenas lacus
                                             vel facilisis. </p>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
