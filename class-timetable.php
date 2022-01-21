@@ -61,28 +61,28 @@
                                     <td class="class-time">6.00am - 8.00am</td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
                                         <h5>WEIGHT LOOSE</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="hover-bg ts-meta" data-tsmeta="fitness">
                                         <h5>Cardio</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
                                         <h5>Yoga</h5>
-                                        <span>Keaf Shen</span>
+                                        <span>Aman Gupta</span>
                                     </td>
                                     <td class="hover-bg ts-meta" data-tsmeta="fitness">
                                         <h5>Fitness</h5>
-                                        <span>Kimberly Stone</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                     <td class="dark-bg blank-td"></td>
                                     <td class="hover-bg ts-meta" data-tsmeta="motivation">
                                         <h5>Boxing</h5>
-                                        <span>Rachel Adam</span>
+                                        <span>Neehal Hansoti</span>
                                     </td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
                                         <h5>Body Building</h5>
-                                        <span>Robert Cage</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -90,23 +90,23 @@
                                     <td class="blank-td"></td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="fitness">
                                         <h5>Fitness</h5>
-                                        <span>Kimberly Stone</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                     <td class="hover-bg ts-meta" data-tsmeta="workout">
                                         <h5>WEIGHT LOOSE</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="motivation">
                                         <h5>Cardio</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="hover-bg ts-meta" data-tsmeta="workout">
                                         <h5>Body Building</h5>
-                                        <span>Robert Cage</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="motivation">
                                         <h5>Karate</h5>
-                                        <span>Donald Grey</span>
+                                        <span>Aman Gupta</span>
                                     </td>
                                     <td class="blank-td"></td>
                                 </tr>
@@ -114,56 +114,56 @@
                                     <td class="class-time">5.00pm - 7.00pm</td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="fitness">
                                         <h5>Boxing</h5>
-                                        <span>Rachel Adam</span>
+                                        <span>Neehal Hansoti</span>
                                     </td>
                                     <td class="hover-bg ts-meta" data-tsmeta="motivation">
                                         <h5>Karate</h5>
-                                        <span>Donald Grey</span>
+                                        <span>Aman Gupta</span>
                                     </td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
                                         <h5>Body Building</h5>
-                                        <span>Robert Cage</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                     <td class="blank-td"></td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
                                         <h5>Yoga</h5>
-                                        <span>Keaf Shen</span>
+                                        <span>Aman Gupta</span>
                                     </td>
                                     <td class="hover-bg ts-meta" data-tsmeta="motivation">
                                         <h5>Cardio</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="fitness">
                                         <h5>Fitness</h5>
-                                        <span>Kimberly Stone</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="class-time">7.00pm - 9.00pm</td>
                                     <td class="hover-bg ts-meta" data-tsmeta="motivation">
                                         <h5>Cardio</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="dark-bg blank-td"></td>
                                     <td class="hover-bg ts-meta" data-tsmeta="fitness">
                                         <h5>Boxing</h5>
-                                        <span>Rachel Adam</span>
+                                        <span>Neehal Hansoti</span>
                                     </td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="workout">
                                         <h5>Yoga</h5>
-                                        <span>Keaf Shen</span>
+                                        <span>Aman Gupta</span>
                                     </td>
                                     <td class="hover-bg ts-meta" data-tsmeta="motivation">
                                         <h5>Karate</h5>
-                                        <span>Donald Grey</span>
+                                        <span>Aman Gupta</span>
                                     </td>
                                     <td class="dark-bg hover-bg ts-meta" data-tsmeta="fitness">
                                         <h5>Boxing</h5>
-                                        <span>Rachel Adam</span>
+                                        <span>Neehal Hansoti</span>
                                     </td>
                                     <td class="hover-bg ts-meta" data-tsmeta="workout">
                                         <h5>WEIGHT LOOSE</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                 </tr>
                             </tbody>

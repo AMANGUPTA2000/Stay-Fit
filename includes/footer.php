@@ -38,11 +38,11 @@
                         </div>
                         <p>StayFit is a concept that will help people to maintain their fitness with their routine life.</p>
                         <div class="fa-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                            <a href="mailto:info.stayfithealth@gmail.com" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="mailto:info.stayfithealth@gmail.com" target="_blank"><i class="fa fa-twitter"></i></a>
+                            <a href="mailto:info.stayfithealth@gmail.com" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                            <a href="mailto:info.stayfithealth@gmail.com" target="_blank"><i class="fa fa-instagram"></i></a>
+                            <a href="mailto:info.stayfithealth@gmail.com" target="_blank"><i class="fa  fa-envelope-o"></i></a>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                         <ul>
                             <li><a href="about-us.php">About</a></li>
                             <li><a href="blog.php">Blog</a></li>
-                            <li><a href="class-details.php">Classes</a></li>
+                            <li><a href="class-details.php?type=All">Classes</a></li>
                             <li><a href="contact.php">Contact</a></li>
                         </ul>
                     </div>

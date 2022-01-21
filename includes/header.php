@@ -100,7 +100,7 @@
                         <ul>
                             <li class="active"><a href="./index.php">Home</a></li>
                             <li><a href="./about-us.php">About Us</a></li>
-                            <li><a href="./class-details.php">Classes</a></li>
+                            <li><a href="./class-details.php?type=All">Classes</a></li>
                             <li><a href="./services.php">Services</a></li>
                             <!-- <li><a href="./team.php">Our Team</a></li> -->
                             <li><a href="#">More</a>

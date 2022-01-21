@@ -98,7 +98,7 @@
                         <div class="ci-text">
                             <span>STRENGTH</span>
                             <h5>Weightlifting</h5>
-                            <a href="class-details.html"><i class="fa fa-angle-right"></i></a>
+                            <a href="class-details.php?type=Weightlifting"><i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                         <div class="ci-text">
                             <span>Cardio</span>
                             <h5>Cycling</h5>
-                            <a href="class-details.html"><i class="fa fa-angle-right"></i></a>
+                            <a href="class-details.php?type=Cycling"><i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -122,7 +122,7 @@
                         <div class="ci-text">
                             <span>STRENGTH</span>
                             <h5>Body Building</h5>
-                            <a href="class-details.html"><i class="fa fa-angle-right"></i></a>
+                            <a href="class-details.php?type=Body Building"><i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -134,7 +134,7 @@
                         <div class="ci-text">
                             <span>Cardio</span>
                             <h4>Treadmill</h4>
-                            <a href="class-details.html"><i class="fa fa-angle-right"></i></a>
+                            <a href="class-details.php?type=Treadmill"><i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                         <div class="ci-text">
                             <span>Training</span>
                             <h4>Boxing</h4>
-                            <a href="class-details.html"><i class="fa fa-angle-right"></i></a>
+                            <a href="class-details.php"><i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,7 @@
                     <div class="bs-text">
                         <h2>Register now to get more deals</h2>
                         <div class="bt-tips">Where health, beauty and fitness meet.</div>
-                        <a href="get-started.html" class="primary-btn  btn-normal">Register Now</a>
+                        <a href="get-started.php" class="primary-btn  btn-normal">Register Now</a>
                     </div>
                 </div>
             </div>
