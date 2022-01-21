@@ -1,4 +1,7 @@
-<?php include 'includes/header.php'; ?>
+<?php 
+include 'includes/header.php'; 
+$type = $_GET['type'];
+?>
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb-bg.jpg">
@@ -10,7 +13,7 @@
                         <div class="bt-option">
                             <a href="./index.php">Home</a>
                             <a href="#">Classes</a>
-                            <span>Body building</span>
+                            <span><?php echo $type ?></span>
                         </div>
                     </div>
                 </div>
