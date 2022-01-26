@@ -124,7 +124,7 @@
                             <i class="fa fa-search"></i>
                         </div>
                         <div class="to-social">
-                            <a href="get-started.php"><i class="fa fa-user"></i></a>
+                            <a href="profile.php"><i class="fa fa-user"></i></a>
                         </div>
                     </div>
                 </div>
