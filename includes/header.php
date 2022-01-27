@@ -52,7 +52,11 @@
         </div>
         <div class="canvas-search search-switch">
             <i class="fa fa-search"></i>
+            |
+            <a href="profile.php"><i class="fa fa-user"></i></a>
         </div>
+        
+        
         <nav class="canvas-menu mobile-menu">
             <ul>
                 <li><a href="./index.php">Home</a></li>
@@ -98,7 +102,7 @@
                 <div class="col-lg-6">
                     <nav class="nav-menu">
                         <ul>
-                            <li class="active"><a href="./index.php">Home</a></li>
+                            <li class=""><a href="./index.php">Home</a></li>
                             <li><a href="./about-us.php">About Us</a></li>
                             <li><a href="./class-details.php?type=All">Classes</a></li>
                             <li><a href="./services.php">Services</a></li>
