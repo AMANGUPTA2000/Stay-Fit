@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase\Auth;
 
-use Kreait\Firebase\Value\Email;
-
 final class SendActionLink
 {
     private CreateActionLink $action;
@@ -23,7 +21,7 @@ final class SendActionLink
         return $this->action->type();
     }
 
-    public function email(): Email
+    public function email(): string
     {
         return $this->action->email();
     }
