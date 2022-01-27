@@ -43,14 +43,42 @@ if(isset($_POST['register-btn'])){
     }
 }
 
-// if(isset($_POST['register-btn'])){
-//     $name = $_POST['name'];
-//     $birthday = $_POST['birthday'];
-//     $email = $_POST['email'];
-//     $password = $_POST['password'];
-//     $phone = $_POST['phone'];
-//     $gender = $_POST['gender'];
+if(isset($_POST['login-btn'])){
+    
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    
+    try {
+        $user = $auth->getUserByEmail("$email");
 
+        $signInResult = $auth->signInWithEmailAndPassword($email, $password);
+        $idTokenString = $signInResult->idToken(); 
+
+        try {
+            $verifiedIdToken = $auth->verifyIdToken($idTokenString);
+            $uid = $verifiedIdToken->claims()->get('sub');
+
+            $_SESSION['verified_user_id'] = $uid;
+            $_SESSION['idTokenString'] = $idTokenString;
+
+            $_SESSION['username'] = $email;
+            $_SESSION['status'] = "Login Successful";
+            header('Location: profile.php');
+            exit();
+        } catch (FailedToVerifyToken $e) {
+            $_SESSION['status'] = "Login Failed";
+        header('Location: get-started.php');
+        exit();
+        }
+
+        
+    } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+        // echo $e->getMessage();
+        $_SESSION['status'] = "Login Failed";
+        header('Location: get-started.php');
+        exit();
+    }
+}
 //     $data = [
 //         'name' => $name,
 //         'birthday' => $birthday,

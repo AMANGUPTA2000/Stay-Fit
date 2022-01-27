@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if(!$_SESSION['username'])
+{
+    header('Location: get-started.php');
+}
 include 'includes/header.php'; 
 ?>
 <link rel="stylesheet" href="css/profile.css">
@@ -18,7 +23,7 @@ include 'includes/header.php';
                       <h4>John Doe</h4>
                       <p class="text-secondary mb-1">Male</p>
                       <p class="text-muted font-size-sm">Beginner</p>
-                      <button class="btn btn-outline-primary">Change Profile Picture</button>
+                      <a href="editprofile.php" class="btn btn-outline-primary">Change Profile Picture</a>
                     </div>
                   </div>
                 </div>

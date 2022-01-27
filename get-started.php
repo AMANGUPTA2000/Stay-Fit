@@ -20,19 +20,27 @@
   <div class="container">
     <div class="container__forms">
       <div class="form">
-        <form class="form__sign-in" id="login-form">
-			<img src="img/main-logo-bg.png" style="width:40%;padding-bottom:-10px">
+      <?php
+
+      if(isset($_SESSION['status']) && $_SESSION['status'] !='') 
+        {
+      echo '<h2 class="bg-danger text-white"> '.$_SESSION['status'].' </h2>';
+      unset($_SESSION['status']);
+        }
+      ?>
+        <form action="code.php" method="POST" class="form__sign-in">
+			    <img src="img/main-logo-bg.png" style="width:40%;padding-bottom:-10px">
           <h2 class="form__title"  id="login-form">Sign In</h2>
           <div class="form__input-field">
             <i class="fas fa-user"></i>
-            <input autocomplete="chrome-off" type="email" class="form-control" id="username" name="username" placeholder="Enter username" required>
+            <input autocomplete="chrome-off" type="email" class="form-control" id="username" name="email" placeholder="Enter username" required>
           </div>
           <div class="form__input-field">
             <i class="fas fa-lock"></i>
             <input autocomplete="chrome-off" type="password" class="form-control" id="userpassword" name="password" placeholder="Enter password" required>
           </div>
           <div class="e-msg"></div>
-          <input class=" mt-2 form__submit" name="submit" type="submit" value="Login" />
+          <button class="mt-2 form__submit" name="login-btn" type="submit">Login</button>
           <!-- forget button--->
           <a  style="font-size: 14px; color: black;" href="forget-password.php">Forget Password?</a>
           <!-- <p class="form__social-text">Or Sign in with social platforms</p>
