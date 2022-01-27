@@ -11,6 +11,17 @@ if(isset($_POST['register-btn'])){
     $mobile = '+91'.$phone;
     $gender = $_POST['gender'];
 
+    $data = [
+        'name' => $name,
+        'birthday' => $birthday,
+        'email' => $email,
+        'password' => $password,
+        'phone' => $phone,
+        'gender' => $gender
+    ];
+
+    $ref = 'register';
+    $postdata = $database->getreference($ref)->push($data);
     $userProperties = [
         'email' => $email,
         'emailVerified' => false,
@@ -22,7 +33,7 @@ if(isset($_POST['register-btn'])){
     ];
 
     $createdUser = $auth->createUser($userProperties);
-    if($createdUser){
+    if($createdUser && $postdata){
         $_SESSION['status'] = "Success";
         header('Location: profile.php');
     }
