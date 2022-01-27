@@ -52,8 +52,8 @@
           </div> -->
         </form>
 
-        <form id="register-form"  class="form__sign-up">
-			<img src="img/main-logo-bg.png" style="width:40%;padding-bottom:-10px">
+        <form action="code.php" method="POST" class="form__sign-up">
+			    <img src="img/main-logo-bg.png" style="width:40%;padding-bottom:-10px">
           <h2 class="form__title">Sign Up</h2>
           <div class="form__input_field" >
             <i class="fas fa-user"></i>
@@ -92,7 +92,8 @@
           
 
           <div class="e-msg"></div>
-          <input class=" mt-2 form__submit" name="submit-btn" type="submit" value="Register" />
+          <button class="mt-2 form__submit" name="register-btn" type="submit">Register</button>
+          <!-- <input class=" mt-2 form__submit" name="submit-btn" type="submit" value="Register" /> -->
 
           <!-- <p class="form__social-text">Or Sign up with social platforms</p>
           <div class="form__social-media">
