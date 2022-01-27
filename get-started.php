@@ -74,7 +74,7 @@
           </div>
           <div class="form__input_field" >
             <i class="fas fa-phone"></i>
-            <input type="text" onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57 || event.charCode==43 || event.charCode==45" minlength="10" maxlength="10"  id="Phone" name="phone" placeholder="Enter Phone" class="form-control"  required>
+            <input type="text" id="Phone" name="phone" placeholder="Enter Phone" class="form-control"  required>
           </div>
           <div class="form__input_field">
             <i class="fas fa-briefcase"></i>

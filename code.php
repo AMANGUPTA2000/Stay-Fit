@@ -8,16 +8,17 @@ if(isset($_POST['register-btn'])){
     $email = $_POST['email'];
     $password = $_POST['password'];
     $phone = $_POST['phone'];
+    $mobile = '+91'.$phone;
     $gender = $_POST['gender'];
 
     $userProperties = [
         'email' => $email,
         'emailVerified' => false,
-        'phoneNumber' => $phone,
+        'phoneNumber' => $mobile,
         'password' => $password,
         'displayName' => $name,
-        // 'birthday' => $birthday,
-        // 'gender' => $gender,
+        'birthday' => $birthday,
+        'gender' => $gender,
     ];
 
     $createdUser = $auth->createUser($userProperties);
