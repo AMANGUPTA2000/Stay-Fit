@@ -12,11 +12,9 @@ use Throwable;
 /**
  * @internal
  */
-class DT
+final class DT
 {
     /**
-     * @internal
-     *
      * @param mixed $value
      */
     public static function toUTCDateTimeImmutable($value): DateTimeImmutable

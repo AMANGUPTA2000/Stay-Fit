@@ -4,18 +4,15 @@ declare(strict_types=1);
 
 namespace Kreait\Firebase;
 
-use Firebase\Auth\Token\Domain\Generator as TokenGenerator;
-use Firebase\Auth\Token\Domain\Verifier;
-use Firebase\Auth\Token\Exception\InvalidToken;
 use GuzzleHttp\ClientInterface;
 use Kreait\Firebase\Auth\ActionCodeSettings;
 use Kreait\Firebase\Auth\ActionCodeSettings\ValidatedActionCodeSettings;
 use Kreait\Firebase\Auth\ApiClient;
 use Kreait\Firebase\Auth\CreateActionLink;
 use Kreait\Firebase\Auth\CreateSessionCookie;
+use Kreait\Firebase\Auth\CustomTokenViaGoogleIam;
 use Kreait\Firebase\Auth\DeleteUsersRequest;
 use Kreait\Firebase\Auth\DeleteUsersResult;
-use Kreait\Firebase\Auth\IdTokenVerifier;
 use Kreait\Firebase\Auth\SendActionLink;
 use Kreait\Firebase\Auth\SendActionLink\FailedToSendActionLink;
 use Kreait\Firebase\Auth\SignIn\FailedToSignIn;
@@ -27,60 +24,70 @@ use Kreait\Firebase\Auth\SignInWithEmailAndOobCode;
 use Kreait\Firebase\Auth\SignInWithEmailAndPassword;
 use Kreait\Firebase\Auth\SignInWithIdpCredentials;
 use Kreait\Firebase\Auth\SignInWithRefreshToken;
-use Kreait\Firebase\Auth\TenantId;
 use Kreait\Firebase\Auth\UserRecord;
 use Kreait\Firebase\Exception\Auth\AuthError;
+use Kreait\Firebase\Exception\Auth\FailedToVerifyToken;
 use Kreait\Firebase\Exception\Auth\RevokedIdToken;
 use Kreait\Firebase\Exception\Auth\UserNotFound;
 use Kreait\Firebase\Exception\InvalidArgumentException;
-use Kreait\Firebase\Project\ProjectId;
-use Kreait\Firebase\Util\Deprecation;
+use Kreait\Firebase\JWT\CustomTokenGenerator;
+use Kreait\Firebase\JWT\IdTokenVerifier;
+use Kreait\Firebase\JWT\Value\Duration;
 use Kreait\Firebase\Util\DT;
 use Kreait\Firebase\Util\JSON;
 use Kreait\Firebase\Value\ClearTextPassword;
 use Kreait\Firebase\Value\Email;
-use Kreait\Firebase\Value\PhoneNumber;
 use Kreait\Firebase\Value\Uid;
 use Lcobucci\JWT\Configuration;
 use Lcobucci\JWT\Token;
+use Lcobucci\JWT\UnencryptedToken;
+use Psr\Clock\ClockInterface;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 use Traversable;
 
-class Auth implements Contract\Auth
+/**
+ * @internal
+ */
+final class Auth implements Contract\Auth
 {
     private ApiClient $client;
     private ClientInterface $httpClient;
-    private TokenGenerator $tokenGenerator;
-    private Verifier $idTokenVerifier;
+
+    /** @var CustomTokenGenerator|CustomTokenViaGoogleIam|null */
+    private $tokenGenerator;
+    private IdTokenVerifier $idTokenVerifier;
     private SignInHandler $signInHandler;
-    private ?TenantId $tenantId;
-    private ?ProjectId $projectId;
+    private ?string $tenantId;
+    private string $projectId;
+    private ClockInterface $clock;
 
     /**
-     * @internal
+     * @param CustomTokenGenerator|CustomTokenViaGoogleIam|null $tokenGenerator
      */
     public function __construct(
-        ApiClient $apiClient,
+        ApiClient $client,
         ClientInterface $httpClient,
-        TokenGenerator $tokenGenerator,
-        Verifier $idTokenVerifier,
+        $tokenGenerator,
+        IdTokenVerifier $idTokenVerifier,
         SignInHandler $signInHandler,
-        ?TenantId $tenantId = null,
-        ?ProjectId $projectId = null
+        string $projectId,
+        ?string $tenantId,
+        ClockInterface $clock
     ) {
-        $this->client = $apiClient;
+        $this->client = $client;
         $this->httpClient = $httpClient;
         $this->tokenGenerator = $tokenGenerator;
         $this->idTokenVerifier = $idTokenVerifier;
         $this->signInHandler = $signInHandler;
         $this->tenantId = $tenantId;
         $this->projectId = $projectId;
+        $this->clock = $clock;
     }
 
     public function getUser($uid): UserRecord
     {
-        $uid = $uid instanceof Uid ? (string) $uid : $uid;
+        $uid = (string) (new Uid((string) $uid));
 
         $userRecord = $this->getUsers([$uid])[$uid] ?? null;
 
@@ -93,11 +100,7 @@ class Auth implements Contract\Auth
 
     public function getUsers(array $uids): array
     {
-        $uids = \array_map(static function ($uid) {
-            $uid = $uid instanceof Uid ? $uid : new Uid($uid);
-
-            return (string) $uid;
-        }, $uids);
+        $uids = \array_map(static fn ($uid) => (string) (new Uid((string) $uid)), $uids);
 
         $users = \array_fill_keys($uids, null);
 
@@ -169,9 +172,9 @@ class Auth implements Contract\Auth
 
     public function getUserByEmail($email): UserRecord
     {
-        $email = $email instanceof Email ? $email : new Email($email);
+        $email = (string) (new Email((string) $email));
 
-        $response = $this->client->getUserByEmail((string) $email);
+        $response = $this->client->getUserByEmail($email);
 
         $data = JSON::decode((string) $response->getBody(), true);
 
@@ -184,9 +187,9 @@ class Auth implements Contract\Auth
 
     public function getUserByPhoneNumber($phoneNumber): UserRecord
     {
-        $phoneNumber = $phoneNumber instanceof PhoneNumber ? $phoneNumber : new PhoneNumber($phoneNumber);
+        $phoneNumber = (string) $phoneNumber;
 
-        $response = $this->client->getUserByPhoneNumber((string) $phoneNumber);
+        $response = $this->client->getUserByPhoneNumber($phoneNumber);
 
         $data = JSON::decode((string) $response->getBody(), true);
 
@@ -224,10 +227,10 @@ class Auth implements Contract\Auth
 
     public function deleteUser($uid): void
     {
-        $uid = $uid instanceof Uid ? $uid : new Uid($uid);
+        $uid = (string) (new Uid((string) $uid));
 
         try {
-            $this->client->deleteUser((string) $uid);
+            $this->client->deleteUser($uid);
         } catch (UserNotFound $e) {
             throw new UserNotFound("No user with uid '{$uid}' found.");
         }
@@ -235,19 +238,13 @@ class Auth implements Contract\Auth
 
     public function deleteUsers(iterable $uids, bool $forceDeleteEnabledUsers = false): DeleteUsersResult
     {
-        if (!($this->projectId instanceof ProjectId)) {
-            throw AuthError::missingProjectId('Batch user deletion cannot be performed.');
-        }
-
-        $request = DeleteUsersRequest::withUids($this->projectId->value(), $uids, $forceDeleteEnabledUsers);
-
-        $tenantId = $this->tenantId !== null ? $this->tenantId->toString() : null;
+        $request = DeleteUsersRequest::withUids($this->projectId, $uids, $forceDeleteEnabledUsers);
 
         $response = $this->client->deleteUsers(
             $request->projectId(),
             $request->uids(),
             $request->enabledUsersShouldBeForceDeleted(),
-            $tenantId
+            $this->tenantId
         );
 
         return DeleteUsersResult::fromRequestAndResponse($request, $response);
@@ -255,7 +252,7 @@ class Auth implements Contract\Auth
 
     public function getEmailActionLink(string $type, $email, $actionCodeSettings = null, ?string $locale = null): string
     {
-        $email = $email instanceof Email ? $email : new Email($email);
+        $email = (string) (new Email((string) $email));
 
         if ($actionCodeSettings === null) {
             $actionCodeSettings = ValidatedActionCodeSettings::empty();
@@ -265,16 +262,14 @@ class Auth implements Contract\Auth
                 : ValidatedActionCodeSettings::fromArray($actionCodeSettings);
         }
 
-        $tenantId = $this->tenantId !== null ? $this->tenantId->toString() : null;
-
         return (new CreateActionLink\GuzzleApiClientHandler($this->httpClient))
-            ->handle(CreateActionLink::new($type, $email, $actionCodeSettings, $tenantId, $locale))
+            ->handle(CreateActionLink::new($type, $email, $actionCodeSettings, $this->tenantId, $locale))
         ;
     }
 
     public function sendEmailActionLink(string $type, $email, $actionCodeSettings = null, ?string $locale = null): void
     {
-        $email = $email instanceof Email ? $email : new Email($email);
+        $email = (string) (new Email((string) $email));
 
         if ($actionCodeSettings === null) {
             $actionCodeSettings = ValidatedActionCodeSettings::empty();
@@ -284,9 +279,7 @@ class Auth implements Contract\Auth
                 : ValidatedActionCodeSettings::fromArray($actionCodeSettings);
         }
 
-        $tenantId = $this->tenantId !== null ? $this->tenantId->toString() : null;
-
-        $createAction = CreateActionLink::new($type, $email, $actionCodeSettings, $tenantId, $locale);
+        $createAction = CreateActionLink::new($type, $email, $actionCodeSettings, $this->tenantId, $locale);
         $sendAction = new SendActionLink($createAction, $locale);
 
         if (\mb_strtolower($type) === 'verify_email') {
@@ -348,126 +341,104 @@ class Auth implements Contract\Auth
         $this->sendEmailActionLink('EMAIL_SIGNIN', $email, $actionCodeSettings, $locale);
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated 5.4.0 use {@see setCustomUserClaims}($id, array $claims) instead
-     */
-    public function setCustomUserAttributes($uid, array $attributes): UserRecord
-    {
-        Deprecation::trigger(__METHOD__, __CLASS__.'::setCustomUserClaims($uid, $claims)');
-
-        $this->setCustomUserClaims($uid, $attributes);
-
-        return $this->getUser($uid);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @deprecated 5.4.0 use {@see setCustomUserClaims}($uid) instead
-     */
-    public function deleteCustomUserAttributes($uid): UserRecord
-    {
-        Deprecation::trigger(__METHOD__, __CLASS__.'::setCustomUserClaims($uid, null)');
-
-        $this->setCustomUserClaims($uid, null);
-
-        return $this->getUser($uid);
-    }
-
     public function setCustomUserClaims($uid, ?array $claims): void
     {
-        $uid = $uid instanceof Uid ? (string) $uid : $uid;
+        $uid = (string) (new Uid((string) $uid));
         $claims ??= [];
 
         $this->client->setCustomUserClaims($uid, $claims);
     }
 
-    public function createCustomToken($uid, array $claims = []): Token
+    public function createCustomToken($uid, array $claims = [], $ttl = 3600): UnencryptedToken
     {
-        $uid = $uid instanceof Uid ? $uid : new Uid($uid);
+        $uid = (string) (new Uid((string) $uid));
 
-        return $this->tokenGenerator->createCustomToken($uid, $claims);
+        $generator = $this->tokenGenerator;
+
+        if ($generator instanceof CustomTokenGenerator) {
+            $tokenString = $generator->createCustomToken($uid, $claims, $ttl)->toString();
+        } elseif ($generator instanceof CustomTokenViaGoogleIam) {
+            $expiresAt = $this->clock->now()->add(Duration::make($ttl)->value());
+
+            $tokenString = $generator->createCustomToken($uid, $claims, $expiresAt)->toString();
+        } else {
+            throw new AuthError('Custom Token Generation is disabled because the current credentials do not permit it');
+        }
+
+        return $this->parseToken($tokenString);
     }
 
-    public function parseToken(string $tokenString): Token
+    public function parseToken(string $tokenString): UnencryptedToken
     {
         try {
-            return Configuration::forUnsecuredSigner()->parser()->parse($tokenString);
+            $parsedToken = Configuration::forUnsecuredSigner()->parser()->parse($tokenString);
+            \assert($parsedToken instanceof UnencryptedToken);
         } catch (Throwable $e) {
             throw new InvalidArgumentException('The given token could not be parsed: '.$e->getMessage());
         }
+
+        return $parsedToken;
     }
 
-    public function verifyIdToken($idToken, bool $checkIfRevoked = false): Token
+    public function verifyIdToken($idToken, bool $checkIfRevoked = false, int $leewayInSeconds = null): UnencryptedToken
     {
-        $leewayInSeconds = 300;
         $verifier = $this->idTokenVerifier;
 
-        if ($verifier instanceof IdTokenVerifier) {
-            $verifier = $verifier->withLeewayInSeconds($leewayInSeconds);
+        $idTokenString = \is_string($idToken) ? $idToken : $idToken->toString();
+
+        try {
+            if ($leewayInSeconds !== null) {
+                $verifier->verifyIdTokenWithLeeway($idTokenString, $leewayInSeconds);
+            } else {
+                $verifier->verifyIdToken($idTokenString);
+            }
+        } catch (Throwable $e) {
+            throw new FailedToVerifyToken($e->getMessage());
         }
 
-        $verifiedToken = $verifier->verifyIdToken($idToken);
+        $verifiedToken = $this->parseToken($idTokenString);
 
-        if ($checkIfRevoked) {
-            // @codeCoverageIgnoreStart
-            if (!($verifiedToken instanceof Token\Plain)) {
-                throw new InvalidToken($verifiedToken, 'The ID token could not be decrypted');
-            }
-            // @codeCoverageIgnoreEnd
+        if (!$checkIfRevoked) {
+            return $verifiedToken;
+        }
 
-            try {
-                $user = $this->getUser($verifiedToken->claims()->get('sub'));
-            } catch (Throwable $e) {
-                throw new InvalidToken($verifiedToken, "Error while getting the token's user: {$e->getMessage()}", $e->getCode(), $e);
-            }
+        try {
+            $user = $this->getUser($verifiedToken->claims()->get('sub'));
+        } catch (Throwable $e) {
+            throw new FailedToVerifyToken("Error while getting the token's user: {$e->getMessage()}", 0, $e);
+        }
 
-            // The timestamp, in seconds, which marks a boundary, before which Firebase ID token are considered revoked.
-            $validSince = $user->tokensValidAfterTime ?? null;
+        // The timestamp, in seconds, which marks a boundary, before which Firebase ID token are considered revoked.
+        $validSince = $user->tokensValidAfterTime ?? null;
 
-            if (!($validSince instanceof \DateTimeImmutable)) {
-                return $verifiedToken;
-            }
+        if (!($validSince instanceof \DateTimeImmutable)) {
+            // The user hasn't logged in yet, so there's nothing to revoke
+            return $verifiedToken;
+        }
 
-            $tokenAuthenticatedAt = DT::toUTCDateTimeImmutable($verifiedToken->claims()->get('auth_time'));
-            $tokenAuthenticatedAtWithLeeway = $tokenAuthenticatedAt->modify('-'.$leewayInSeconds.' seconds');
+        $tokenAuthenticatedAt = DT::toUTCDateTimeImmutable($verifiedToken->claims()->get('auth_time'));
 
-            $validSinceWithLeeway = DT::toUTCDateTimeImmutable($validSince)->modify('-'.$leewayInSeconds.' seconds');
+        if ($leewayInSeconds) {
+            $tokenAuthenticatedAt = $tokenAuthenticatedAt->modify('-'.$leewayInSeconds.' seconds');
+        }
 
-            if ($tokenAuthenticatedAtWithLeeway->getTimestamp() < $validSinceWithLeeway->getTimestamp()) {
-                throw new RevokedIdToken($verifiedToken);
-            }
+        if ($tokenAuthenticatedAt->getTimestamp() < $validSince->getTimestamp()) {
+            throw new RevokedIdToken($verifiedToken);
         }
 
         return $verifiedToken;
     }
 
-    public function verifyPasswordResetCode(string $oobCode): void
-    {
-        // Not returning the email on purpose to not break BC
-        $this->verifyPasswordResetCodeAndReturnEmail($oobCode);
-    }
-
-    public function verifyPasswordResetCodeAndReturnEmail(string $oobCode): Email
+    public function verifyPasswordResetCode(string $oobCode): string
     {
         $response = $this->client->verifyPasswordResetCode($oobCode);
 
-        $email = JSON::decode((string) $response->getBody(), true)['email'];
-
-        return new Email($email);
+        return JSON::decode((string) $response->getBody(), true)['email'];
     }
 
-    public function confirmPasswordReset(string $oobCode, $newPassword, bool $invalidatePreviousSessions = true): void
+    public function confirmPasswordReset(string $oobCode, $newPassword, bool $invalidatePreviousSessions = true): string
     {
-        // Not returning the email on purpose to not break BC
-        $this->confirmPasswordResetAndReturnEmail($oobCode, $newPassword, $invalidatePreviousSessions);
-    }
-
-    public function confirmPasswordResetAndReturnEmail(string $oobCode, $newPassword, bool $invalidatePreviousSessions = true): Email
-    {
-        $newPassword = $newPassword instanceof ClearTextPassword ? $newPassword : new ClearTextPassword($newPassword);
+        $newPassword = (string) (new ClearTextPassword((string) $newPassword));
 
         $response = $this->client->confirmPasswordReset($oobCode, (string) $newPassword);
 
@@ -477,22 +448,22 @@ class Auth implements Contract\Auth
             $this->revokeRefreshTokens($this->getUserByEmail($email)->uid);
         }
 
-        return new Email($email);
+        return $email;
     }
 
     public function revokeRefreshTokens($uid): void
     {
-        $uid = $uid instanceof Uid ? $uid : new Uid($uid);
+        $uid = (string) (new Uid((string) $uid));
 
-        $this->client->revokeRefreshTokens((string) $uid);
+        $this->client->revokeRefreshTokens($uid);
     }
 
     public function unlinkProvider($uid, $provider): UserRecord
     {
-        $uid = $uid instanceof Uid ? $uid : new Uid($uid);
+        $uid = (string) (new Uid((string) $uid));
         $provider = \array_map('strval', (array) $provider);
 
-        $response = $this->client->unlinkProvider((string) $uid, $provider);
+        $response = $this->client->unlinkProvider($uid, $provider);
 
         return $this->getUserRecordFromResponse($response);
     }
@@ -502,7 +473,11 @@ class Auth implements Contract\Auth
         $claims ??= [];
         $uid = $user instanceof UserRecord ? $user->uid : (string) $user;
 
-        $customToken = $this->createCustomToken($uid, $claims);
+        try {
+            $customToken = $this->createCustomToken($uid, $claims);
+        } catch (Throwable $e) {
+            throw FailedToSignIn::fromPrevious($e);
+        }
 
         $action = SignInWithCustomToken::fromValue($customToken->toString());
 
@@ -539,8 +514,8 @@ class Auth implements Contract\Auth
 
     public function signInWithEmailAndPassword($email, $clearTextPassword): SignInResult
     {
-        $email = $email instanceof Email ? (string) $email : $email;
-        $clearTextPassword = $clearTextPassword instanceof ClearTextPassword ? (string) $clearTextPassword : $clearTextPassword;
+        $email = (string) (new Email((string) $email));
+        $clearTextPassword = (string) (new ClearTextPassword((string) $clearTextPassword));
 
         $action = SignInWithEmailAndPassword::fromValues($email, $clearTextPassword);
 
@@ -553,7 +528,7 @@ class Auth implements Contract\Auth
 
     public function signInWithEmailAndOobCode($email, string $oobCode): SignInResult
     {
-        $email = $email instanceof Email ? (string) $email : $email;
+        $email = (string) (new Email((string) $email));
 
         $action = SignInWithEmailAndOobCode::fromValues($email, $oobCode);
 
@@ -585,42 +560,6 @@ class Auth implements Contract\Auth
         throw new FailedToSignIn('Failed to sign in anonymously: No ID token or UID available');
     }
 
-    /**
-     * @deprecated 5.26.0 Use {@see signInWithIdpAccessToken()} with 'twitter.com' instead.
-     * @codeCoverageIgnore
-     */
-    public function signInWithTwitterOauthCredential(string $accessToken, string $oauthTokenSecret, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult
-    {
-        return $this->signInWithIdpAccessToken('twitter.com', $accessToken, $redirectUrl, $oauthTokenSecret, $linkingIdToken);
-    }
-
-    /**
-     * @deprecated 5.26.0 Use {@see signInWithIdpIdToken()} with 'google.com' instead.
-     * @codeCoverageIgnore
-     */
-    public function signInWithGoogleIdToken(string $idToken, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult
-    {
-        return $this->signInWithIdpIdToken('google.com', $idToken, $redirectUrl, $linkingIdToken);
-    }
-
-    /**
-     * @deprecated 5.26.0 Use {@see signInWithIdpAccessToken()} with 'facebook.com' instead.
-     * @codeCoverageIgnore
-     */
-    public function signInWithFacebookAccessToken(string $accessToken, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult
-    {
-        return $this->signInWithIdpAccessToken('facebook.com', $accessToken, $redirectUrl, null, $linkingIdToken);
-    }
-
-    /**
-     * @deprecated 5.26.0 Use {@see signInWithIdpIdToken()} with 'apple.com' instead.
-     * @codeCoverageIgnore
-     */
-    public function signInWithAppleIdToken(string $idToken, ?string $rawNonce = null, ?string $redirectUrl = null, ?string $linkingIdToken = null): SignInResult
-    {
-        return $this->signInWithIdpIdToken('apple.com', $idToken, $redirectUrl, $linkingIdToken, $rawNonce);
-    }
-
     public function signInWithIdpAccessToken($provider, string $accessToken, $redirectUrl = null, ?string $oauthTokenSecret = null, ?string $linkingIdToken = null, ?string $rawNonce = null): SignInResult
     {
         $provider = (string) $provider;
@@ -647,7 +586,7 @@ class Auth implements Contract\Auth
             $action = $action->withRequestUri($redirectUrl);
         }
 
-        if ($this->tenantId instanceof TenantId) {
+        if ($this->tenantId !== null) {
             $action = $action->withTenantId($this->tenantId);
         }
 
@@ -679,7 +618,7 @@ class Auth implements Contract\Auth
             $action = $action->withRequestUri($redirectUrl);
         }
 
-        if ($this->tenantId instanceof TenantId) {
+        if ($this->tenantId !== null) {
             $action = $action->withTenantId($this->tenantId);
         }
 

@@ -23,10 +23,12 @@ use Kreait\Firebase\Messaging\MulticastSendReport;
 use Kreait\Firebase\Messaging\RegistrationToken;
 use Kreait\Firebase\Messaging\RegistrationTokens;
 use Kreait\Firebase\Messaging\Topic;
-use Kreait\Firebase\Project\ProjectId;
 use Kreait\Firebase\Util\JSON;
 
-class Messaging implements Contract\Messaging
+/**
+ * @internal
+ */
+final class Messaging implements Contract\Messaging
 {
     private string $projectId;
 
@@ -34,14 +36,11 @@ class Messaging implements Contract\Messaging
 
     private AppInstanceApiClient $appInstanceApi;
 
-    /**
-     * @internal
-     */
-    public function __construct(ProjectId $projectId, ApiClient $messagingApiClient, AppInstanceApiClient $appInstanceApiClient)
+    public function __construct(string $projectId, ApiClient $messagingApiClient, AppInstanceApiClient $appInstanceApiClient)
     {
         $this->messagingApi = $messagingApiClient;
         $this->appInstanceApi = $appInstanceApiClient;
-        $this->projectId = $projectId->value();
+        $this->projectId = $projectId;
     }
 
     public function send($message, bool $validateOnly = false): array

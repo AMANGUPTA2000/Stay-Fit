@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 2.0.1 - 2022-01-03
+
+Fixed failing ID token verification when the `nbf` claim is not present.
+
+## 2.0.0 - 2022-01-03
+
+After updating, please refer to the [Migration Documentation](MIGRATE-1.x-to-2.0.md) to be ready for the 2.0 release of this library.
+
+* Removed `Firebase\Auth` namespace
+* Ensured compatibility with PHP 8.1 by adding it to the test matrix.
+* Dropped support for `lcobucci/jwt` <4.1
+* Dropped support for `guzzlehttp/guzzle` <7.0
+* Dropped direct support for `psr/simple-cache`
+
 ## 1.16.1 - 2021-10-03
 
 Update [lcobucci/jwt](https://github.com/lcobucci/jwt) version constraint to `^3.4.6|^4.0.4|^4.1.5` to prevent misuse
