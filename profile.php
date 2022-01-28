@@ -1,6 +1,7 @@
 <?php 
 include('authentication.php');
 include 'includes/header.php'; 
+include('firebase/includes/dbconfig.php');
 ?>
 <link rel="stylesheet" href="css/profile.css">
 
@@ -16,8 +17,23 @@ include 'includes/header.php';
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>John Doe</h4>
-                      <p class="text-secondary mb-1">Male</p>
+                      <?php
+                        try {
+                          $user = $auth->getUser("$uid");
+                        }catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+                          echo $e->getMessage();
+                        }
+                        $ref_table = 'register';
+                        $mail = $user->email;
+                        $fetch = $database->getReference('register')->getValue();
+                        
+                        if($fetch > 0){
+                          foreach($fetch as $key => $row){
+                            if($row['email'] == $mail){
+                              
+                      ?>
+                      <h4><?= $row['name']; ?></h4>
+                      <p class="text-secondary mb-1"><?= $row['gender']; ?></p>
                       <p class="text-muted font-size-sm">Beginner</p>
                       <a href="editprofile.php" class="btn btn-outline-primary">Change Profile Picture</a>
                     </div>
@@ -57,7 +73,7 @@ include 'includes/header.php';
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Kenneth Valdez
+                      <?= $row['name']; ?>
                     </div>
                   </div>
                   <hr>
@@ -66,7 +82,7 @@ include 'includes/header.php';
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      fip@jukmuh.al
+                      <?= $row['email']; ?>
                     </div>
                   </div>
                   <hr>
@@ -75,7 +91,7 @@ include 'includes/header.php';
                       <h6 class="mb-0">Phone</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      (239) 816-9029
+                      <?= $row['phone']; ?>
                     </div>
                   </div>
                   <hr>
@@ -84,7 +100,7 @@ include 'includes/header.php';
                       <h6 class="mb-0">Gender</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      Male
+                      <?= $row['gender']; ?>
                     </div>
                   </div>
                   <hr>
@@ -93,7 +109,7 @@ include 'includes/header.php';
                       <h6 class="mb-0">Birthdate</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                      10-01-1999
+                      <input type="date" style="border: none;background: #fff;" class="text-secondary" value="<?= $row['birthday']; ?>" readonly disabled>
                     </div>
                   </div>
                   <hr>
@@ -104,7 +120,14 @@ include 'includes/header.php';
                   </div>
                 </div>
               </div>
-
+              <?php
+                  }
+                }
+              }
+              else{
+                echo "no record";
+              }
+              ?>
               <div class="row gutters-sm">
                 <div class="col-sm-12 mb-6">
                   <div class="card h-100">
