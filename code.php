@@ -31,8 +31,18 @@ if(isset($_POST['register-btn'])){
         'birthday' => $birthday,
         'gender' => $gender,
     ];
+    try{
+        $createdUser = $auth->createUser($userProperties);
+    }catch (FirebaseException $e) {
+        $_SESSION['status'] = "Please try Again.";
+        header('Location: get-started.php');
+        exit();
+    } catch (Throwable $e) {
+        $_SESSION['status'] = "Email or Phone no. Already Exists.";
+        header('Location: get-started.php');
+        exit();
+    } 
 
-    $createdUser = $auth->createUser($userProperties);
     if($createdUser && $postdata){
         $_SESSION['status'] = "Success";
         header('Location: profile.php');
@@ -72,9 +82,19 @@ if(isset($_POST['login-btn'])){
         }
 
         
-    } catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+    }
+    catch (FirebaseException $e) {
+        $_SESSION['status'] = "Invalid Credentials";
+        header('Location: get-started.php');
+        exit();
+    } catch (Throwable $e) {
+        $_SESSION['status'] = "Invalid Credentials";
+        header('Location: get-started.php');
+        exit();
+    } 
+    catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
         // echo $e->getMessage();
-        $_SESSION['status'] = "Login Failed";
+        $_SESSION['status'] = "Invalid Credentials";
         header('Location: get-started.php');
         exit();
     }
