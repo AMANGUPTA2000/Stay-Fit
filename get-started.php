@@ -61,7 +61,7 @@
         </form>
 
         <form action="code.php" method="POST" class="form__sign-up">
-			    <img src="img/main-logo-bg.png" style="width:40%;padding-bottom:-10px">
+			    <img src="img/main-logo-bg.png" style="width:20%;padding-bottom:-10px">
           <h2 class="form__title">Sign Up</h2>
           <div class="form__input_field" >
             <i class="fas fa-user"></i>
@@ -69,7 +69,7 @@
             <input type="text"  id="name" name="name"  class="form-control" placeholder="Enter Name" required>
           </div>
           <div class="form__input_field" >
-            <i class="fas fa-user"></i>
+            <i class="fas fa-calendar"></i>
             <input type="text" placeholder="Birthdate" onfocus="(this.type='date')" name="birthday" class="form-control"  required />
           </div>
           <div class="form__input_field" >
@@ -85,7 +85,7 @@
             <input type="text" id="Phone" name="phone" placeholder="Enter Phone" class="form-control"  required>
           </div>
           <div class="form__input_field">
-            <i class="fas fa-briefcase"></i>
+            <i class="fas fa-venus-mars"></i>
             <select  class="memberselect" class="form-control"  name="gender" required="required">
               <option value="" class="memberselect" selected disabled="">Select Gender</option>
               <option  class="memberselect" value="Male">Male</option>
