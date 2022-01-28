@@ -1,9 +1,5 @@
 <?php 
-session_start();
-if(!$_SESSION['username'])
-{
-    header('Location: get-started.php');
-}
+include('authentication.php');
 include 'includes/header.php'; 
 ?>
 <link rel="stylesheet" href="css/profile.css">

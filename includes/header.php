@@ -54,6 +54,8 @@
             <i class="fa fa-search"></i>
             |
             <a href="profile.php"><i class="fa fa-user"></i></a>
+            |
+            <a href="logout.php"><i class="fa fa-sign-out"></i></a>
         </div>
         
         
@@ -128,7 +130,12 @@
                             <i class="fa fa-search"></i>
                         </div>
                         <div class="to-social">
-                            <a href="profile.php"><i class="fa fa-user"></i></a>
+                            <style>
+
+                            </style>
+                            <a href="profile.php"><i class="fa fa-user"></i> Profile</a>
+
+                            <a href="logout.php"><i class="fa fa-sign-out"></i>Logout</a>
                         </div>
                     </div>
                 </div>
