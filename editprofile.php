@@ -64,12 +64,15 @@ include('firebase/includes/dbconfig.php');
 				<div class="col-lg-8">
 					<div class="card">
 						<div class="card-body">
+						<form action="code.php" method="post">
 							<div class="row mb-3">
 								<div class="col-sm-3">
 									<h6 class="mb-0">Full Name</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="<?= $row['name']; ?>">
+									<input type="hidden" class="form-control" value="<?= $key; ?>" name="token">
+									<input type="hidden" class="form-control" value="<?= $uid; ?>" name="uid">
+									<input type="text" class="form-control" value="<?= $row['name']; ?>" name="name">
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -77,7 +80,7 @@ include('firebase/includes/dbconfig.php');
 									<h6 class="mb-0">Email</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="<?= $row['email']; ?>">
+									<input type="text" class="form-control" value="<?= $row['email']; ?>" name="email">
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -85,7 +88,7 @@ include('firebase/includes/dbconfig.php');
 									<h6 class="mb-0">Phone</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="<?= $row['phone']; ?>">
+									<input type="text" class="form-control" value="<?= $row['phone']; ?>" name="phone">
 								</div>
 							</div>
 							<div class="row mb-3">
@@ -93,7 +96,7 @@ include('firebase/includes/dbconfig.php');
 									<h6 class="mb-0">Gender</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-                                    <select class="memberselect" class="form-control"  name="gender" required="required">
+                                    <select class="memberselect" class="form-control"  name="gender">
                                         <option value="<?= $row['gender']; ?>" class="memberselect" selected disabled=""><?= $row['gender']; ?></option>
                                         <option  class="memberselect" value="Male">Male</option>
                                         <option  class="memberselect" value="Female">Female</option>
@@ -106,15 +109,17 @@ include('firebase/includes/dbconfig.php');
 									<h6 class="mb-0">Birthdate</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="date" class="form-control" value="<?= $row['birthday']; ?>">
+									<input type="date" class="form-control" value="<?= $row['birthday']; ?>" name="birthday">
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-sm-3"></div>
 								<div class="col-sm-9 text-secondary">
-									<input type="button" class="btn btn-primary px-4" value="Save Changes">
+								<button class="btn btn-primary" name="update-btn" type="submit">Save Changes</button>
+									<a href="profile.php" class="btn btn-danger">Cancel</a>
 								</div>
 							</div>
+						</form>
 						</div>
 					</div>
 					<?php
@@ -130,8 +135,8 @@ include('firebase/includes/dbconfig.php');
 						<div class="col-sm-12">
 							<div class="card">
 								<div class="card-body">
-									<h5 class="d-flex align-items-center mb-3">Project Status</h5>
-									<p>Web Design</p>
+									<h5 class="d-flex align-items-center mb-3">Workout Status</h5>
+									<p>Weight Lifting</p>
 									<div class="progress mb-3" style="height: 5px">
 										<div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
 									</div>
