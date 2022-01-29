@@ -126,17 +126,29 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="top-option">
+                    <div class="to-social">
+                        <nav class="navbar navbar-expand-lg navbar-light bg">
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" style="color:#fff" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-user"></i>
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="profile.php"><i class="fa fa-user"></i> Profile</a>
+                                        <a class="dropdown-item" href="logout.php"><i class="fa fa-sign-out"></i>Logout</a>
+                                    </div>
+                                </li>
+                                </ul>
+                                
+                            </div>
+                            |
+                        </nav>
+                        </div>
                         <div class="to-search search-switch">
                             <i class="fa fa-search"></i>
                         </div>
-                        <div class="to-social">
-                            <style>
-
-                            </style>
-                            <a href="profile.php"><i class="fa fa-user"></i> Profile</a>
-
-                            <a href="logout.php"><i class="fa fa-sign-out"></i>Logout</a>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
