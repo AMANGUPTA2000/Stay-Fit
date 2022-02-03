@@ -37,7 +37,7 @@ include('firebase/includes/dbconfig.php');
                   <?php
                   }
                   else{?>
-                    <img src="https://www.stayfit.com/img/Content/avatar/avatar8.png" alt="female 2" class="rounded-circle" width="150">
+                    <img src="img/avatar8.png" alt="female 2" class="rounded-circle" width="150">
                   <?php
                   }
                   }else{
@@ -47,14 +47,26 @@ include('firebase/includes/dbconfig.php');
                   <?php 
                   }
                   else{?>
-                    <img src="https://www.stayfit.com/img/Content/avatar/avatar7.png" alt="male 2" class="rounded-circle" width="150">
+                    <img src="img/avatar7.png" alt="male 2" class="rounded-circle" width="150">
                   <?php
                   }
                   }?>
                     <div class="mt-3">
                       <h4><?= $row['name']; ?></h4>
                       <p class="text-secondary mb-1"><?= $row['gender']; ?></p>
-                      <p class="text-muted font-size-sm">Beginner</p>
+                      <p class="text-muted font-size-sm">
+                        <?php
+                        if($row['Weight Lifting']>'80' && $row['Cycling']>'80' && $row['Body Building']>'80' && $row['Treadmill']>'80' && $row['Boxing']>'80'){
+                          echo 'Advanced';
+                        }
+                        else if($row['Weight Lifting']>'60' && $row['Cycling']>'60' && $row['Body Building']>'60' && $row['Treadmill']>'60' && $row['Boxing']>'60'){
+                          echo 'Intermediate';
+                        }
+                        else{
+                          echo 'Beginner';
+                        }
+                        ?>
+                      </p>
                       <a href="editprofile.php" class="btn btn-outline-primary">Change Profile Picture</a>
                     </div>
                   </div>
@@ -144,26 +156,26 @@ include('firebase/includes/dbconfig.php');
                 <div class="col-sm-12 mb-6">
                   <div class="card h-100">
                     <div class="card-body">
-                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Workout Status</i></h6>
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Workout Progress (Shows how much you have progress in achieving your goals.)</i></h6>
                       <small>Weight Lifting</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: <?=$row['Weight Lifting']?>%" aria-valuenow="<?= $row['Weight Lifting']?>" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Cycling</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-danger" role="progressbar" style="width: <?=$row['Cycling']?>%" aria-valuenow="<?=$row['Cycling']?>" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Body Building</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-success" role="progressbar" style="width: <?=$row['Body Building']?>%" aria-valuenow="<?=$row['Body Building']?>" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Treadmill</small>
                       <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-warning" role="progressbar" style="width: <?=$row['Treadmill']?>%" aria-valuenow="<?=$row['Treadmill']?>" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Boxing</small>
-                      <div class="progress mb-3" style="height: 5px">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress" style="height: 5px">
+                        <div class="progress-bar bg-info" role="progressbar" style="width: <?=$row['Boxing']?>%" aria-valuenow="<?=$row['Boxing']?>" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </div>

@@ -51,7 +51,19 @@ include('firebase/includes/dbconfig.php');
 								<div class="mt-3">
 									<h4><?= $row['name']; ?></h4>
 									<p class="text-secondary mb-1"><?= $row['gender']; ?></p>
-									<p class="text-muted font-size-sm">Beginner</p>
+									<p class="text-muted font-size-sm">
+										<?php
+										if($row['Weight Lifting']>'80' && $row['Cycling']>'80' && $row['Body Building']>'80' && $row['Treadmill']>'80' && $row['Boxing']>'80'){
+										  echo 'Advanced';
+										}
+										else if($row['Weight Lifting']>'60' && $row['Cycling']>'60' && $row['Body Building']>'60' && $row['Treadmill']>'60' && $row['Boxing']>'60'){
+										  echo 'Intermediate';
+										}
+										else{
+										  echo 'Beginner';
+										}
+										?>
+									</p>
 									<!-- <a href="editprofile.php" class="btn btn-outline-primary">Change Profile Picture</a> -->
 								</div>
 							</div>
@@ -82,104 +94,121 @@ include('firebase/includes/dbconfig.php');
 					</div>
 				</div>
 				<div class="col-lg-8">
-					<div class="card">
-						<div class="card-body">
-						<form action="code.php" method="post" enctype="multipart/form-data">
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Full Name</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="hidden" class="form-control" value="<?= $key; ?>" name="token">
-									<input type="hidden" class="form-control" value="<?= $uid; ?>" name="uid">
-									<input type="text" class="form-control" value="<?= $row['name']; ?>" name="name">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Email</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="<?= $row['email']; ?>" name="email">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Phone</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="<?= $row['phone']; ?>" name="phone">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Gender</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-                                    <select class="memberselect" class="form-control"  name="gender">
-                                        <option value="<?= $row['gender']; ?>" class="memberselect" selected disabled=""><?= $row['gender']; ?></option>
-                                        <option  class="memberselect" value="Male">Male</option>
-                                        <option  class="memberselect" value="Female">Female</option>
-                                        <option class="memberselect" value="Others">Others</option>
-                                    </select>    
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Birthdate</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="date" class="form-control" value="<?= $row['birthday']; ?>" name="birthday">
-								</div>
-							</div>
-							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Change Profile Pic</h6>
-								</div>
-								<div class="col-sm-9 text-secondary">
-									<input type="file" name="prof" class="form-control"  accept="image/*">
-								</div>
-							</div>	
-							<div class="row">
-								<div class="col-sm-3"></div>
-								<div class="col-sm-9 text-secondary">
-								<button class="btn btn-primary" name="update-btn" type="submit">Save Changes</button>
-									<a href="profile.php" class="btn btn-danger">Cancel</a>
-								</div>
-							</div>
-						</form>
-						</div>
-					</div>
-                    <br>
-					<div class="row">
-						<div class="col-sm-12">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="d-flex align-items-center mb-3">Workout Status</h5>
-									<p>Weight Lifting</p>
-									<div class="progress mb-3" style="height: 5px">
-										<div class="progress-bar bg-primary" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+					<form action="code.php" method="post" enctype="multipart/form-data">
+						<div class="card">
+							<div class="card-body">
+							
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Full Name</h6>
 									</div>
-									<p>Website Markup</p>
-									<div class="progress mb-3" style="height: 5px">
-										<div class="progress-bar bg-danger" role="progressbar" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<p>One Page</p>
-									<div class="progress mb-3" style="height: 5px">
-										<div class="progress-bar bg-success" role="progressbar" style="width: 89%" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<p>Mobile Template</p>
-									<div class="progress mb-3" style="height: 5px">
-										<div class="progress-bar bg-warning" role="progressbar" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-									</div>
-									<p>Backend API</p>
-									<div class="progress" style="height: 5px">
-										<div class="progress-bar bg-info" role="progressbar" style="width: 66%" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+									<div class="col-sm-9 text-secondary">
+										<input type="hidden" class="form-control" value="<?= $key; ?>" name="token">
+										<input type="hidden" class="form-control" value="<?= $uid; ?>" name="uid">
+										<input type="text" class="form-control" value="<?= $row['name']; ?>" name="name">
 									</div>
 								</div>
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Email</h6>
+									</div>
+									<div class="col-sm-9 text-secondary">
+										<input type="text" class="form-control" value="<?= $row['email']; ?>" name="email">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Phone</h6>
+									</div>
+									<div class="col-sm-9 text-secondary">
+										<input type="text" class="form-control" value="<?= $row['phone']; ?>" name="phone">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Gender</h6>
+									</div>
+									<div class="col-sm-9 text-secondary">
+										<select class="memberselect" class="form-control"  name="gender">
+											<option value="<?= $row['gender']; ?>" class="memberselect" selected disabled=""><?= $row['gender']; ?></option>
+											<option  class="memberselect" value="Male">Male</option>
+											<option  class="memberselect" value="Female">Female</option>
+											<option class="memberselect" value="Others">Others</option>
+										</select>    
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Birthdate</h6>
+									</div>
+									<div class="col-sm-9 text-secondary">
+										<input type="date" class="form-control" value="<?= $row['birthday']; ?>" name="birthday">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Change Profile Pic</h6>
+									</div>
+									<div class="col-sm-9 text-secondary">
+										<input type="file" name="prof" class="form-control"  accept="image/*">
+									</div>
+								</div>	
+								<div class="row">
+									<div class="col-sm-3"></div>
+									<div class="col-sm-9 text-secondary">
+									<button class="btn btn-primary" name="update-btn" type="submit">Save Changes</button>
+										<a href="profile.php" class="btn btn-danger">Cancel</a>
+									</div>
+								</div>
+							
 							</div>
 						</div>
-					</div>
+						<br>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="card">
+									<div class="card-body">
+										<h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">Workout Progress (Move the sliders to set the value of your choice.)</i></h6>
+										<input type="hidden" value='Weight Lifting' name='wlift'>
+										<small>Weight Lifting</small>
+										<div class="progress mb-3" style="height: 5px;position:absolute;width:90%">
+											<input type="range" class="progress-bar bg-primary" role="progressbar" style="width: 100%" min="1" max="100" value="<?=$row['Weight Lifting']?>" id="myRange1" name="myRange1">	
+										</div>
+										<p style="width:18%;position:absolute;right:0">Value: <span id="demo1"></span></p>
+										<br><br>
+										<input type="hidden" value='Cycling' name='cycle'>
+										<small>Cycling</small>
+										<div class="progress mb-3" style="height: 5px;position:absolute;width:90%">
+											<input type="range" class="progress-bar bg-danger" role="progressbar" style="width: 100%" min="1" max="100" value="<?=$row['Cycling']?>" id="myRange2" name="myRange2">
+										</div>
+										<p style="width:18%;position:absolute;right:0">Value: <span id="demo2"></span></p>
+										<br><br>
+										<input type="hidden" value='Body Building' name='bodyBuild'>
+										<small>Body Building</small>
+										<div class="progress mb-3" style="height: 5px;position:absolute;width:90%">
+											<input type="range" class="progress-bar bg-success" role="progressbar" style="width: 100%" min="1" max="100" value="<?=$row['Body Building']?>" id="myRange3" name="myRange3">
+										</div>
+										<p style="width:18%;position:absolute;right:0">Value: <span id="demo3"></span></p>
+										<br><br>
+										<input type="hidden" value='Treadmill' name='tread'>
+										<small>Treadmill</small>
+										<div class="progress mb-3" style="height: 5px;position:absolute;width:90%">
+											<input type="range" class="progress-bar bg-primary" role="progressbar" style="width: 100%" min="1" max="100" value="<?=$row['Treadmill']?>" id="myRange4" name="myRange4">
+										</div>
+										<p style="width:18%;position:absolute;right:0">Value: <span id="demo4"></span></p>
+										<br><br>
+										<input type="hidden" value='Boxing' name='box'>
+										<small>Boxing</small>
+										<div class="progress" style="height: 5px;position:absolute;width:90%">
+											<input type="range" class="progress-bar bg-primary" role="progressbar" style="width: 100%" min="1" max="100" value="<?=$row['Boxing']?>" id="myRange5" name="myRange5">
+										</div>
+										<p style="width:18%;position:absolute;right:0">Value: <span id="demo5"></span></p>
+										<br><br>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
 				<?php
 					}
@@ -192,4 +221,39 @@ include('firebase/includes/dbconfig.php');
 			</div>
 		</div>
 	</div>
+	<script>
+		var slider1 = document.getElementById("myRange1");
+		var slider2 = document.getElementById("myRange2");
+		var slider3 = document.getElementById("myRange3");
+		var slider4 = document.getElementById("myRange4");
+		var slider5 = document.getElementById("myRange5");
+		
+		var output1 = document.getElementById("demo1");
+		var output2 = document.getElementById("demo2");
+		var output3 = document.getElementById("demo3");
+		var output4 = document.getElementById("demo4");
+		var output5 = document.getElementById("demo5");
+
+		output1.innerHTML = slider1.value;
+		output2.innerHTML = slider2.value;
+		output3.innerHTML = slider3.value;
+		output4.innerHTML = slider4.value;
+		output5.innerHTML = slider5.value;
+
+		slider1.oninput = function() {
+			output1.innerHTML = this.value;
+		}
+		slider2.oninput = function() {
+			output2.innerHTML = this.value;
+		}
+		slider3.oninput = function() {
+			output3.innerHTML = this.value;
+		}
+		slider4.oninput = function() {
+			output4.innerHTML = this.value;
+		}
+		slider5.oninput = function() {
+			output5.innerHTML = this.value;
+		}
+	</script>
 <?php include 'includes/footer.php'; ?>
