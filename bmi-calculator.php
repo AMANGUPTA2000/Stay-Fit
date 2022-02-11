@@ -71,12 +71,12 @@
                                 <div class="col-sm-6">
                                     <input type="text" placeholder="Weight / kg" id="weight" required>
                                 </div>
-                                <div class="col-sm-6">
+                                <!-- <div class="col-sm-6">
                                     <input type="text" placeholder="Age" required>
                                 </div>
                                 <div class="col-sm-6">
                                     <input type="text" placeholder="Sex" required>
-                                </div>
+                                </div> -->
                                 <div class="col-sm-6" id="bmi">
                                     <span style="color:#fff"> Your BMI is </span><input disabled value="" type="text" name="total" id="total">
                                 </div>
