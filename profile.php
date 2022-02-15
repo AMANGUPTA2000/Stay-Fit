@@ -56,10 +56,10 @@ include('firebase/includes/dbconfig.php');
                       <p class="text-secondary mb-1"><?= $row['gender']; ?></p>
                       <p class="text-muted font-size-sm">
                         <?php
-                        if($row['Weight Lifting']>'80' && $row['Cycling']>'80' && $row['Body Building']>'80' && $row['Treadmill']>'80' && $row['Boxing']>'80'){
+                        if(($row['Weight Lifting']+$row['Cycling']+$row['Body Building']+$row['Treadmill']+$row['Boxing'])/5>'80'){
                           echo 'Advanced';
                         }
-                        else if($row['Weight Lifting']>'60' && $row['Cycling']>'60' && $row['Body Building']>'60' && $row['Treadmill']>'60' && $row['Boxing']>'60'){
+                        else if(($row['Weight Lifting']+$row['Cycling']+$row['Body Building']+$row['Treadmill']+$row['Boxing'])/5>'60'){
                           echo 'Intermediate';
                         }
                         else{
@@ -67,6 +67,7 @@ include('firebase/includes/dbconfig.php');
                         }
                         ?>
                       </p>
+                      
                       <a href="editprofile.php" class="btn btn-outline-primary">Change Profile Picture</a>
                     </div>
                   </div>
@@ -95,6 +96,9 @@ include('firebase/includes/dbconfig.php');
                     <span class="text-secondary">stayfit</span>
                   </li>
                 </ul>
+              </div>
+              <div class="card mt-3">
+                <a href="post-blog.php"  class="btn btn-outline-primary">Post your own Blog</a>
               </div>
             </div>
             <div class="col-md-8">

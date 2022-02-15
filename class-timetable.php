@@ -9,7 +9,7 @@
                         <h2>Timetable</h2>
                         <div class="bt-option">
                             <a href="./index.php">Home</a>
-                            <a href="#">Pages</a>
+                            <a href="#">More</a>
                             <span>Services</span>
                         </div>
                     </div>

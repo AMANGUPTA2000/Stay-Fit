@@ -53,14 +53,14 @@ include('firebase/includes/dbconfig.php');
 									<p class="text-secondary mb-1"><?= $row['gender']; ?></p>
 									<p class="text-muted font-size-sm">
 										<?php
-										if($row['Weight Lifting']>'80' && $row['Cycling']>'80' && $row['Body Building']>'80' && $row['Treadmill']>'80' && $row['Boxing']>'80'){
-										  echo 'Advanced';
+										if(($row['Weight Lifting']+$row['Cycling']+$row['Body Building']+$row['Treadmill']+$row['Boxing'])/5>'80'){
+										echo 'Advanced';
 										}
-										else if($row['Weight Lifting']>'60' && $row['Cycling']>'60' && $row['Body Building']>'60' && $row['Treadmill']>'60' && $row['Boxing']>'60'){
-										  echo 'Intermediate';
+										else if(($row['Weight Lifting']+$row['Cycling']+$row['Body Building']+$row['Treadmill']+$row['Boxing'])/5>'60'){
+										echo 'Intermediate';
 										}
 										else{
-										  echo 'Beginner';
+										echo 'Beginner';
 										}
 										?>
 									</p>

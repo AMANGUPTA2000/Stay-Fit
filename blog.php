@@ -1,4 +1,8 @@
-<?php include 'includes/header.php'; ?>
+<?php 
+include('authentication.php');
+include 'includes/header.php'; 
+include('firebase/includes/dbconfig.php');
+?>
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb-bg.jpg">
@@ -9,7 +13,7 @@
                         <h2>Our Blog</h2>
                         <div class="bt-option">
                             <a href="./index.php">Home</a>
-                            <a href="#">Pages</a>
+                            <a href="#">More</a>
                             <span>Blog</span>
                         </div>
                     </div>
@@ -23,87 +27,47 @@
     <section class="blog-section spad">
         <div class="container">
             <div class="row">
+                <a href="post-blog.php"  class="btn btn-outline-primary">Post your own Blog</a>
+            </div>
+            <br>
+            <div class="row">
+                
                 <div class="col-lg-8 p-0">
+                    <?php
+                        try {
+                        $user = $auth->getUser("$uid");
+                        }catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+                        echo $e->getMessage();
+                        }
+                        $ref_table = 'blog';
+                        $mail = $user->email;
+                        $fetch = $database->getReference('blog')->getValue();
+                        
+                        if($fetch > 0){
+                        foreach($fetch as $key => $row){
+                            
+                            
+                    ?>
                     <div class="blog-item">
                         <div class="bi-pic">
-                            <img src="img/blog/blog-1.jpg" alt="">
+                            <img src="<?php echo $row['image']; ?>" alt="">
                         </div>
                         <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
+                            <h5><a href="./blog-details.html"><?= $row['heading'] ?></a></h5>
                             <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
+                                <li>by <?= $row['name'] ?></li>
+                                <li><?= $row['date'] ?></li>
                             </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
+                            <p><?= $row['content'] ?></p>
                         </div>
                     </div>
-                    <div class="blog-item">
-                        <div class="bi-pic">
-                            <img src="img/blog/blog-2.jpg" alt="">
-                        </div>
-                        <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
-                            <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
-                        </div>
-                    </div>
-                    <div class="blog-item">
-                        <div class="bi-pic">
-                            <img src="img/blog/blog-3.jpg" alt="">
-                        </div>
-                        <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
-                            <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
-                        </div>
-                    </div>
-                    <div class="blog-item">
-                        <div class="bi-pic">
-                            <img src="img/blog/blog-4.jpg" alt="">
-                        </div>
-                        <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
-                            <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
-                        </div>
-                    </div>
-                    <div class="blog-item">
-                        <div class="bi-pic">
-                            <img src="img/blog/blog-5.jpg" alt="">
-                        </div>
-                        <div class="bi-text">
-                            <h5><a href="./blog-details.html">Vegan White Peach Mug Cobbler With Cardam Vegan White Peach Mug
-                                    Cobbler...</a></h5>
-                            <ul>
-                                <li>by Admin</li>
-                                <li>Aug,15, 2019</li>
-                                <li>20 Comment</li>
-                            </ul>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua accumsan lacus facilisis.</p>
-                        </div>
-                    </div>
+                    <?php
+                    }
+                    }
+                    else{
+                        echo "no record";
+                    }
+                    ?>
                     <div class="blog-pagination">
                         <a href="#">1</a>
                         <a href="#">2</a>
@@ -111,6 +75,7 @@
                         <a href="#">Next</a>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-8 p-0">
                     <div class="sidebar-option">
                         <div class="so-categories">
@@ -126,51 +91,37 @@
                         </div>
                         <div class="so-latest">
                             <h5 class="title">Feature posts</h5>
-                            <div class="latest-large set-bg" data-setbg="img/letest-blog/latest-1.jpg">
+                            <?php
+                                try {
+                                $user = $auth->getUser("$uid");
+                                }catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
+                                echo $e->getMessage();
+                                }
+                                $ref_table = 'blog';
+                                $mail = $user->email;
+                                $fetch = $database->getReference('blog')->getValue();
+                                
+                                if($fetch > 0){
+                                foreach($fetch as $key => $row){
+                                    
+                                    
+                            ?>
+                            <div class="latest-large set-bg" data-setbg="<?= $row['image'] ?>">
                                 <div class="ll-text">
-                                    <h5><a href="./blog-details.html">This Japanese Way of Making Iced Coffee Is a Game...</a></h5>
+                                    <h5><a href="./blog-details.html"><?= $row['heading'] ?></a></h5>
                                     <ul>
-                                        <li>Aug 20, 2019</li>
-                                        <li>20 Comment</li>
+                                        <li>by <?= $row['name'] ?></li>
+                                        <li><?= $row['date'] ?></li>
                                     </ul>
                                 </div>
                             </div>
-                            <div class="latest-item">
-                                <div class="li-pic">
-                                    <img src="img/letest-blog/latest-2.jpg" alt="">
-                                </div>
-                                <div class="li-text">
-                                    <h6><a href="./blog-details.html">Grilled Potato and Green Bean Salad</a></h6>
-                                    <span class="li-time">Aug 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="latest-item">
-                                <div class="li-pic">
-                                    <img src="img/letest-blog/latest-3.jpg" alt="">
-                                </div>
-                                <div class="li-text">
-                                    <h6><a href="./blog-details.html">The $8 French Rosé I Buy in Bulk Every Summer</a></h6>
-                                    <span class="li-time">Aug 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="latest-item">
-                                <div class="li-pic">
-                                    <img src="img/letest-blog/latest-4.jpg" alt="">
-                                </div>
-                                <div class="li-text">
-                                    <h6><a href="./blog-details.html">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
-                                    <span class="li-time">Aug 15, 2019</span>
-                                </div>
-                            </div>
-                            <div class="latest-item">
-                                <div class="li-pic">
-                                    <img src="img/letest-blog/latest-5.jpg" alt="">
-                                </div>
-                                <div class="li-text">
-                                    <h6><a href="./blog-details.html">The Best Weeknight Baked Potatoes, 3 Creative Ways</a></h6>
-                                    <span class="li-time">Aug 15, 2019</span>
-                                </div>
-                            </div>
+                            <?php
+                            }
+                            }
+                            else{
+                                echo "no record";
+                            }
+                            ?>
                         </div>
                         <div class="so-tags">
                             <h5 class="title">Popular tags</h5>

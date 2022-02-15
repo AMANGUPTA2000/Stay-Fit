@@ -187,6 +187,63 @@ if(isset($_POST['update-btn'])){
     }
     
 }
+
+if(isset($_POST['blog-btn'])){
+    
+    $name = $_POST['name'];
+    $date = $_POST['date'];
+    $email = $_POST['email'];
+    $heading = $_POST['heading'];
+    $content = $_POST['content'];
+    $token = $_POST['token'];
+    $uid = $_POST['uid'];
+
+    //profile pic
+    $profile = $_FILES['prof']['name'];
+    $randomNo = rand(1111,9999);
+
+    $user = $auth->getUser($uid);
+    $new = $randomNo.$profile;
+    $old = $user->photoUrl;
+
+    if($profile != NULL){
+        $filename = 'blogs/'.$new;
+    }
+    else{
+        $filename = $old;
+    }
+    
+    $data = [
+        'name' => $name,
+        'date' => $date,
+        'email' => $email,
+        // 'password' => $password,
+        'heading' => $heading,
+        'content' => $content,
+        'image' => $filename,
+    ];
+
+    $ref = 'blog';
+    $postdata = $database->getreference($ref)->push($data);
+    
+
+    if($postdata){
+        if($profile != NULL){
+            move_uploaded_file($_FILES['prof']['tmp_name'], "blogs/".$new);
+            if($old != NULL)
+            {
+                unlink($old);
+            }
+        }
+        $_SESSION['status'] = "Success";
+        header('Location: blog.php');
+    }
+    else{
+        $_SESSION['status'] = "Failure";
+        header('Location: post-blog.php');
+    }
+    
+}
 //     $data = [
 //         'name' => $name,
 //         'birthday' => $birthday,
