@@ -1,6 +1,5 @@
 <?php 
-include('authentication.php');
-include 'includes/header.php'; 
+include('includes/header.php');
 include('firebase/includes/dbconfig.php');
 ?>
 
@@ -34,13 +33,7 @@ include('firebase/includes/dbconfig.php');
                 
                 <div class="col-lg-8 p-0">
                     <?php
-                        try {
-                        $user = $auth->getUser("$uid");
-                        }catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
-                        echo $e->getMessage();
-                        }
                         $ref_table = 'blog';
-                        $mail = $user->email;
                         $fetch = $database->getReference('blog')->getValue();
                         
                         if($fetch > 0){
@@ -92,13 +85,7 @@ include('firebase/includes/dbconfig.php');
                         <div class="so-latest">
                             <h5 class="title">Feature posts</h5>
                             <?php
-                                try {
-                                $user = $auth->getUser("$uid");
-                                }catch (\Kreait\Firebase\Exception\Auth\UserNotFound $e) {
-                                echo $e->getMessage();
-                                }
                                 $ref_table = 'blog';
-                                $mail = $user->email;
                                 $fetch = $database->getReference('blog')->getValue();
                                 
                                 if($fetch > 0){
