@@ -156,7 +156,7 @@
     <!-- ChoseUs Section End -->
 
     <!-- Banner Section Begin -->
-    <section class="banner-section set-bg" data-setbg="img/banner-bg.jpg">
+    <section class="banner-section set-bg" style="opacity: 1.5;"data-setbg="img/cover-pic.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

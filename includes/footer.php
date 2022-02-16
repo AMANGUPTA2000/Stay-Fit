@@ -64,7 +64,7 @@
                             <li><a href="get-started.php">Login</a></li>
                             <li><a href="#">My account</a></li>
                             <li><a href="#">Subscribe</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="contact.php">Contact</a></li>
                         </ul>
                     </div>
                 </div>
