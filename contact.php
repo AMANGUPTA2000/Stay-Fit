@@ -21,6 +21,13 @@
     <!-- Contact Section Begin -->
     <section class="contact-section spad">
         <div class="container">
+            <?php
+                if(isset($_SESSION['status']) && $_SESSION['status'] !='') 
+                {
+                echo '<h2 class="bg-success text-white"> '.$_SESSION['status'].' </h2>';
+                unset($_SESSION['status']);
+                }
+            ?>
             <div class="row">
                 <div class="col-lg-6">
                     <div class="section-title contact-title">
@@ -47,12 +54,11 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="leave-comment">
-                        <form action="#">
-                            <input type="text" placeholder="Name">
-                            <input type="text" placeholder="Email">
-                            <input type="text" placeholder="Website">
-                            <textarea placeholder="Comment"></textarea>
-                            <button type="submit">Submit</button>
+                        <form action="code.php" method="post" enctype="multipart/form-data">
+                            <input type="text" placeholder="Name" name="name" required>
+                            <input type="email" placeholder="Email" name="email" required>
+                            <textarea placeholder="Comment" name="comment" required></textarea>
+                            <button type="submit" name="subscribe-btn">Submit</button>
                         </form>
                     </div>
                 </div>
