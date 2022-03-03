@@ -146,7 +146,7 @@
                         <div class="ci-text">
                             <span>Training</span>
                             <h4>Boxing</h4>
-                            <a href="class-details.php"><i class="fa fa-angle-right"></i></a>
+                            <a href="class-details.php?type=Boxing"><i class="fa fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>

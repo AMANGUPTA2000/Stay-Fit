@@ -12,7 +12,7 @@ $type = $_GET['type'];
                         <h2>Classes detail</h2>
                         <div class="bt-option">
                             <a href="./index.php">Home</a>
-                            <a href="#">Classes</a>
+                            <a href="./class-details.php">Classes</a>
                             <span><?php echo $type ?></span>
                         </div>
                     </div>
@@ -85,10 +85,10 @@ $type = $_GET['type'];
                             <h5 class="title">Categories</h5>
                             <ul>
                                 <li><a href="#">Yoga <span>12</span></a></li>
-                                <li><a href="#">Runing <span>32</span></a></li>
+                                <li><a href="#">Running <span>32</span></a></li>
                                 <li><a href="#">Weightloss <span>86</span></a></li>
-                                <li><a href="#">Cario <span>25</span></a></li>
-                                <li><a href="#">Body buiding <span>36</span></a></li>
+                                <li><a href="#">Cardio <span>25</span></a></li>
+                                <li><a href="#">Body building <span>36</span></a></li>
                                 <li><a href="#">Nutrition <span>15</span></a></li>
                             </ul>
                         </div>
@@ -181,28 +181,28 @@ $type = $_GET['type'];
                                     <td class="class-time">6.00am - 8.00am</td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>WEIGHT LOOSE</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="fitness">
                                         <h5>Cardio</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>Yoga</h5>
-                                        <span>Keaf Shen</span>
+                                        <span>Aman Gupta</span>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="fitness">
                                         <h5>Fitness</h5>
-                                        <span>Kimberly Stone</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                     <td class="dark-bg blank-td"></td>
                                     <td class="hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Boxing</h5>
-                                        <span>Rachel Adam</span>
+                                        <span>Neehal Hansoti</span>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>Body Building</h5>
-                                        <span>Robert Cage</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -210,19 +210,19 @@ $type = $_GET['type'];
                                     <td class="blank-td"></td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
                                         <h5>Fitness</h5>
-                                        <span>Kimberly Stone</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>WEIGHT LOOSE</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Cardio</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>Body Building</h5>
-                                        <span>Robert Cage</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Karate</h5>
@@ -234,7 +234,7 @@ $type = $_GET['type'];
                                     <td class="class-time">5.00pm - 7.00pm</td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
                                         <h5>Boxing</h5>
-                                        <span>Rachel Adam</span>
+                                        <span>Neehal Hansoti</span>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Karate</h5>
@@ -242,36 +242,36 @@ $type = $_GET['type'];
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>Body Building</h5>
-                                        <span>Robert Cage</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                     <td class="blank-td"></td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>Yoga</h5>
-                                        <span>Keaf Shen</span>
+                                        <span>Aman Gupta</span>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Cardio</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
                                         <h5>Fitness</h5>
-                                        <span>Kimberly Stone</span>
+                                        <span>Dhruv Gandhi</span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="class-time">7.00pm - 9.00pm</td>
                                     <td class="hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Cardio</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                     <td class="dark-bg blank-td"></td>
                                     <td class="hover-dp ts-meta" data-tsmeta="fitness">
                                         <h5>Boxing</h5>
-                                        <span>Rachel Adam</span>
+                                        <span>Neehal Hansoti</span>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>Yoga</h5>
-                                        <span>Keaf Shen</span>
+                                        <span>Aman Gupta</span>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Karate</h5>
@@ -279,11 +279,11 @@ $type = $_GET['type'];
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
                                         <h5>Boxing</h5>
-                                        <span>Rachel Adam</span>
+                                        <span>Neehal Hansoti</span>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>WEIGHT LOOSE</h5>
-                                        <span>RLefew D. Loee</span>
+                                        <span>Jathin Prakash</span>
                                     </td>
                                 </tr>
                             </tbody>
