@@ -62,8 +62,8 @@
                         <h4>Support</h4>
                         <ul>
                             <li><a href="get-started.php">Login</a></li>
-                            <li><a href="#">My account</a></li>
-                            <li><a href="#">Subscribe</a></li>
+                            <li><a href="profile.php">My account</a></li>
+                            <li><a href="contact.php">Subscribe</a></li>
                             <li><a href="contact.php">Contact</a></li>
                         </ul>
                     </div>
@@ -91,12 +91,16 @@
                     </div>
                 </div>
             </div>
+            
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <div class="copyright-text">
-                        <p>
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="" target="_blank">Team-ADJN</a><center><div class="hide" style="border-top: 5px solid gray;">1) Aman Gupta 2) Dhruv Gandhi</div>
-  <div class="hide" style="border-bottom: 5px solid gray;">3) Jathin Prakash 4) Neehal Hansoti</div></center></p>
+                    <button class="btn" style="background-color: ;" onclick="window.location.href='developer.php'">
+                        <p>                          
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This website is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="" target="_blank">Team-ADJN</a><center><div class="hide" style="border-top: 5px solid gray;">1) Aman Gupta 2) Dhruv Gandhi</div>
+                    <div class="hide" style="border-bottom: 5px solid gray;">3) Jathin Prakash 4) Neehal Hansoti</div></center>
+                    </p>
+                    </button>
                     </div>
                 </div>
             </div>

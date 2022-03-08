@@ -74,6 +74,7 @@
                         <!-- <li><a href="./team.php">Our team</a></li> -->
                         <li><a href="./gallery.php">Gallery</a></li>
                         <li><a href="./blog.php">Our blog</a></li>
+                        <li><a href="./developer.php">Developers</a></li>
                         <!-- <li><a href="./404.php">404</a></li> -->
                     </ul>
                 </li>
@@ -117,6 +118,7 @@
                                     <!-- <li><a href="./team.php">Our team</a></li> -->
                                     <li><a href="./gallery.php">Gallery</a></li>
                                     <li><a href="./blog.php">Our blog</a></li>
+                                    <li><a href="./developer.php">Developers</a></li>
                                     <!-- <li><a href="./404.php">404</a></li> -->
                                 </ul>
                             </li>
