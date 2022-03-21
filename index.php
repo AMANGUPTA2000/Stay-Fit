@@ -196,7 +196,7 @@
                         <div class="pi-price">
                             <span>Click on the link below</span>
                         </div>
-                        <a href="img/team/neehal.jpg" Download class="primary-btn pricing-btn">Download Now</a>
+                        <a href="includes/stayfitapkv_1.apk" Download class="primary-btn pricing-btn">Download Now</a>
                         <br>
                         <img src="img/appqr.png" alt="">
                     </div>
