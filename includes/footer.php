@@ -65,6 +65,7 @@
                             <li><a href="profile.php">My account</a></li>
                             <li><a href="contact.php">Subscribe</a></li>
                             <li><a href="contact.php">Contact</a></li>
+                            <li><a href="privacy_policy.php">Privacy Policy</a></li>
                         </ul>
                     </div>
                 </div>
