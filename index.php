@@ -10,7 +10,7 @@
                             <div class="hi-text">
                                 <span>Shape yourself</span>
                                 <h1>Stay <strong>Fit</strong> <br> Stay <strong>Healthy</strong></h1>
-                                <a href="#" class="primary-btn">Get info</a>
+                                <a href="about-us.php" class="primary-btn">Get info</a>
                             </div>
                         </div>
                     </div>
@@ -23,7 +23,7 @@
                             <div class="hi-text">
                                 <span>Shape yourself</span>
                                 <h1>Be <strong>strong</strong><br> Push <strong> Yourself</strong></h1>
-                                <a href="#" class="primary-btn">Get info</a>
+                                <a href="about-us.php" class="primary-btn">Get info</a>
                             </div>
                         </div>
                     </div>
